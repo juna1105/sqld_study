@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
+import Footer from "./Footer";
 
 // 모바일 환경 감지
 const useMobileDetection = () => {
@@ -22,6 +23,8 @@ const useMobileDetection = () => {
 const LayoutContainer = styled.div`
   min-height: 100vh;
   background-color: #081017;
+  display: flex;
+  flex-direction: column;
 `;
 
 const MainContent = styled.div`
@@ -41,6 +44,7 @@ const Layout = ({ children }) => {
     <LayoutContainer>
       {!isMobile && <Header />}
       <MainContent isMobile={isMobile}>{children}</MainContent>
+      <Footer />
     </LayoutContainer>
   );
 };
