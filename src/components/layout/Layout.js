@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
+
+// 모바일 환경 감지
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
 
 const LayoutContainer = styled.div`
   min-height: 100vh;
@@ -9,15 +26,21 @@ const LayoutContainer = styled.div`
 
 const MainContent = styled.div`
   display: flex;
-  min-height: calc(100vh - 70px); // Header 높이를 뺀 값
-  padding-top: 70px; // 헤더 높이만큼 상단 패딩 추가
+  min-height: ${props => props.isMobile ? '100vh' : 'calc(100vh - 70px)'};
+  padding-top: ${props => props.isMobile ? '0' : '70px'};
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Layout = ({ children }) => {
+  const isMobile = useMobileDetection();
+  
   return (
     <LayoutContainer>
-      <Header />
-      <MainContent>{children}</MainContent>
+      {!isMobile && <Header />}
+      <MainContent isMobile={isMobile}>{children}</MainContent>
     </LayoutContainer>
   );
 };
