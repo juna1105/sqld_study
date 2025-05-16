@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const ContentContainer = styled.main`
   flex: 1;
-  padding: 24px;
+  padding: ${(props) => (props.$isQuizPage ? "0" : "24px")};
   background-color: #081017;
   color: #d7dfe4;
+  display: flex;
+  height: ${(props) => (props.$isQuizPage ? "100%" : "auto")};
 `;
 
 const Title = styled.h1`
@@ -17,29 +20,14 @@ const Title = styled.h1`
   margin-bottom: 12px;
 `;
 
-const NextButton = styled.button`
-  background-color: #2395e9;
-  color: #000000;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 22px;
-  cursor: pointer;
-  margin-top: 24px;
+const ContentArea = ({ children }) => {
+  const location = useLocation();
+  const isQuizPage = location.pathname === "/quiz";
 
-  &:hover {
-    background-color: #1b7ac2;
-  }
-`;
-
-const ContentArea = ({ children, onNext }) => {
   return (
-    <ContentContainer>
-      {children == null && onNext == null && <Title>{"준비 중 입니다."}</Title>}
+    <ContentContainer $isQuizPage={isQuizPage}>
+      {children == null && <Title>{"준비 중 입니다."}</Title>}
       {children}
-      {onNext && <NextButton onClick={onNext}>다음 →</NextButton>}
     </ContentContainer>
   );
 };

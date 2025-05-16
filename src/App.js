@@ -9,6 +9,8 @@ import styled from "styled-components";
 import Layout from "./components/layout/Layout";
 import ContentArea from "./components/layout/ContentArea";
 import StudyContent from "./components/study/StudyContent";
+import QuizPage from "./components/quiz/QuizPage";
+import MockTestPage from "./components/mock_test/MockTestPage";
 import studyContent from "./data/studyContent";
 
 const AppContainer = styled.div`
@@ -17,28 +19,47 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const [activeItem, setActiveItem] = useState("엔티티");
+  const [activeItem, setActiveItem] = useState("데이터 모델의 이해");
 
   const handleItemClick = (item) => {
     setActiveItem(item);
+    window.scrollTo(0, 0);
   };
 
   return (
     <Router>
       <AppContainer>
-        <Layout activeItem={activeItem} onItemClick={handleItemClick}>
+        <Layout>
           <Routes>
             <Route path="/" element={<Navigate to="/study" replace />} />
             <Route
               path="/study"
               element={
                 <ContentArea>
-                  <StudyContent item={activeItem} contentData={studyContent} />
+                  <StudyContent
+                    item={activeItem}
+                    contentData={studyContent}
+                    onItemClick={handleItemClick}
+                  />
                 </ContentArea>
               }
             />
-            <Route path="/quiz" element={<ContentArea />} />
-            <Route path="/mock-exam" element={<ContentArea />} />
+            <Route
+              path="/quiz"
+              element={
+                <ContentArea>
+                  <QuizPage />
+                </ContentArea>
+              }
+            />
+            <Route
+              path="/mock-exam"
+              element={
+                <ContentArea>
+                  <MockTestPage />
+                </ContentArea>
+              }
+            />
           </Routes>
         </Layout>
       </AppContainer>

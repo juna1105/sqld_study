@@ -6,6 +6,11 @@ const HeaderContainer = styled.header`
   background-color: #081017;
   padding: 16px 48px;
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 `;
 
 const HeaderContent = styled.div`

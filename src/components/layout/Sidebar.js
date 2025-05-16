@@ -13,7 +13,7 @@ const SidebarContainer = styled.aside`
 `;
 
 const ScrollContainer = styled.div`
-  padding: 20px 10px;
+  padding: 0 10px 20px 10px; /* 상단 패딩 제거, 좌우 하단 패딩 유지 */
   overflow-y: auto;
   flex: 1;
   max-height: calc(100vh - 70px); /* 사이드바의 최대 높이 설정 */
@@ -40,7 +40,7 @@ const ScrollContainer = styled.div`
 
 const MenuSection = styled.div`
   margin-bottom: 24px;
-  background: rgba(215, 223, 228, 0.02);
+  background: rgba(215, 223, 228, 0.08);
   border-radius: 12px;
   padding: 12px 8px;
 `;
@@ -87,7 +87,7 @@ const MenuItem = styled.button`
 const menuData = [
   {
     title: "데이터 모델링의 이해",
-    items: ["엔티티", "속성", "관계", "식별자"],
+    items: ["데이터 모델의 이해", "엔티티", "속성", "관계", "식별자"],
   },
   {
     title: "데이터 모델과 SQL",

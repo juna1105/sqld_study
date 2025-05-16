@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Sidebar from "../layout/Sidebar";
+
+const StudyPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
 const ContentContainer = styled.div`
-  width: 100%;
+  flex: 1;
+  padding: 0 24px 24px 24px;
 `;
 
 const Title = styled.h1`
@@ -103,71 +110,77 @@ const Caption = styled.p`
   font-style: italic;
 `;
 
-const StudyContent = ({ item, contentData }) => {
+const StudyContent = ({ item, contentData, onItemClick }) => {
   if (!contentData || !contentData[item]) {
     return (
-      <ContentContainer>
-        <Title>준비 중입니다</Title>
-        <Paragraph>
-          선택하신 "{item}" 주제의 학습 내용을 준비 중입니다. 다른 주제를 선택해
-          주세요.
-        </Paragraph>
-      </ContentContainer>
+      <StudyPageContainer>
+        <Sidebar activeItem={item} onItemClick={onItemClick} />
+        <ContentContainer>
+          <Title>준비 중입니다</Title>
+          <Paragraph>
+            선택하신 "{item}" 주제의 학습 내용을 준비 중입니다. 다른 주제를
+            선택해 주세요.
+          </Paragraph>
+        </ContentContainer>
+      </StudyPageContainer>
     );
   }
 
   const data = contentData[item];
 
   return (
-    <ContentContainer>
-      <Title>{data.title}</Title>
-      {data.content.map((section, index) => {
-        switch (section.type) {
-          case "paragraph":
-            return <Paragraph key={index}>{section.text}</Paragraph>;
-          case "examples":
-            return <Examples key={index}>{section.text}</Examples>;
-          case "subtitle":
-            return <Subtitle key={index}>{section.text}</Subtitle>;
-          case "list":
-            return (
-              <List key={index}>
-                {section.items.map((item, itemIndex) => (
-                  <ListItem key={itemIndex}>{item}</ListItem>
-                ))}
-              </List>
-            );
-          case "code":
-            return <CodeBlock key={index}>{section.text}</CodeBlock>;
-          case "table":
-            return (
-              <TableContainer key={index}>
-                <Table>
-                  <thead>
-                    <tr>
-                      {section.headers.map((header, headerIndex) => (
-                        <Th key={headerIndex}>{header}</Th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {section.rows.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {row.map((cell, cellIndex) => (
-                          <Td key={cellIndex}>{cell}</Td>
+    <StudyPageContainer>
+      <Sidebar activeItem={item} onItemClick={onItemClick} />
+      <ContentContainer>
+        <Title>{data.title}</Title>
+        {data.content.map((section, index) => {
+          switch (section.type) {
+            case "paragraph":
+              return <Paragraph key={index}>{section.text}</Paragraph>;
+            case "examples":
+              return <Examples key={index}>{section.text}</Examples>;
+            case "subtitle":
+              return <Subtitle key={index}>{section.text}</Subtitle>;
+            case "list":
+              return (
+                <List key={index}>
+                  {section.items.map((item, itemIndex) => (
+                    <ListItem key={itemIndex}>{item}</ListItem>
+                  ))}
+                </List>
+              );
+            case "code":
+              return <CodeBlock key={index}>{section.text}</CodeBlock>;
+            case "table":
+              return (
+                <TableContainer key={index}>
+                  <Table>
+                    <thead>
+                      <tr>
+                        {section.headers.map((header, headerIndex) => (
+                          <Th key={headerIndex}>{header}</Th>
                         ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
-                {section.caption && <Caption>{section.caption}</Caption>}
-              </TableContainer>
-            );
-          default:
-            return null;
-        }
-      })}
-    </ContentContainer>
+                    </thead>
+                    <tbody>
+                      {section.rows.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, cellIndex) => (
+                            <Td key={cellIndex}>{cell}</Td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  {section.caption && <Caption>{section.caption}</Caption>}
+                </TableContainer>
+              );
+            default:
+              return null;
+          }
+        })}
+      </ContentContainer>
+    </StudyPageContainer>
   );
 };
 

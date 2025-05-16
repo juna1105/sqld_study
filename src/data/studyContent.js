@@ -1,6 +1,90 @@
 // SQLD 학습 콘텐츠
 const studyContent = {
   // 데이터 모델링의 이해
+  "데이터 모델의 이해": {
+    title: "데이터 모델의 이해 (Understanding Data Models)",
+    content: [
+      {
+        type: "paragraph",
+        text: "데이터 모델(Data Model)은 현실 세계의 데이터를 컴퓨터 시스템에서 이해하고 관리할 수 있도록 추상화한 구조예요. 즉, 데이터를 어떻게 구성하고 저장할지를 정의하는 청사진 같은 역할을 해요.",
+      },
+      {
+        type: "examples",
+        text: "예를 들어, 학교의 학생, 교수, 과목, 수강 정보 등을 표현하려면 각 정보를 엔티티로 나누고, 그 관계를 정의해야 해요. 이런 구조를 미리 계획하는 것이 바로 데이터 모델링이에요.",
+      },
+      {
+        type: "subtitle",
+        text: "데이터 모델의 목적",
+      },
+      {
+        type: "list",
+        items: [
+          "현실 세계의 정보를 데이터베이스로 옮기기 위한 설계",
+          "데이터 간의 구조와 관계를 명확하게 표현",
+          "정보 시스템 개발자, 사용자, 데이터 관리자 간의 의사소통 도구 역할",
+          "데이터 무결성과 일관성 보장",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "데이터 모델의 종류",
+      },
+      {
+        type: "table",
+        headers: ["모델", "설명", "예시"],
+        rows: [
+          [
+            "개념적 데이터 모델",
+            "현실 세계를 개념적으로 표현한 모델. 주로 엔터티, 속성, 관계 중심",
+            "ER 다이어그램(Entity-Relationship Diagram)",
+          ],
+          [
+            "논리적 데이터 모델",
+            "개념 모델을 실제 DBMS에 맞게 논리적으로 정리한 모델",
+            "릴레이션 모델, 객체지향 모델 등",
+          ],
+          [
+            "물리적 데이터 모델",
+            "논리 모델을 실제 데이터베이스 구조로 구현한 모델",
+            "테이블, 인덱스, 파티션 등으로 구성",
+          ],
+        ],
+        caption: "3단계 데이터 모델 비교",
+      },
+      {
+        type: "paragraph",
+        text: "이렇게 모델을 구분함으로써 데이터베이스 설계 시 추상화 수준을 조절할 수 있고, 시스템 구축 단계에서 각 역할에 맞는 설계를 수행할 수 있어요.",
+      },
+      {
+        type: "subtitle",
+        text: "ER 모델이란?",
+      },
+      {
+        type: "paragraph",
+        text: "ER(Entity-Relationship) 모델은 가장 널리 사용되는 개념적 데이터 모델로, 엔터티(객체), 속성(특성), 관계(연관성)를 사용하여 현실 세계의 데이터를 시각적으로 표현합니다.",
+      },
+      {
+        type: "list",
+        items: [
+          "엔터티(Entity): 정보의 단위가 되는 객체 (예: 학생, 교수)",
+          "속성(Attribute): 엔터티가 가진 구체적 정보 (예: 이름, 학번)",
+          "관계(Relationship): 엔터티 간의 연관성 (예: 학생 - 수강 → 과목)",
+        ],
+      },
+      {
+        type: "examples",
+        text: "‘학생’과 ‘과목’은 각각 엔터티이고, ‘수강한다’는 관계입니다. ‘학생’의 ‘이름’, ‘학번’은 속성이죠.",
+      },
+      {
+        type: "subtitle",
+        text: "요약",
+      },
+      {
+        type: "paragraph",
+        text: "데이터 모델은 복잡한 현실 세계를 체계적으로 표현하여, 효과적인 데이터베이스 구축과 유지보수를 가능하게 합니다. 좋은 데이터 모델링은 시스템의 안정성과 확장성을 결정짓는 핵심 요소입니다.",
+      },
+    ],
+  },
   엔티티: {
     title: "엔티티 (Entity)",
     content: [
@@ -2245,376 +2329,2209 @@ GROUP BY 학과.학과코드, 학과.학과명;`,
       },
     ],
   },
+
   "SELECT 문": {
     title: "SELECT 문",
     content: [
       {
         type: "paragraph",
-        text: "SELECT 문은 관계형 데이터베이스에서 데이터를 조회하는 가장 기본적이고 핵심적인 SQL 명령어입니다. 데이터를 검색, 필터링, 정렬, 그룹화하는 등 다양한 작업을 수행할 수 있습니다.",
-      },
-      {
-        type: "examples",
-        text: "예: 학생 테이블에서 모든 학생의 정보를 조회하거나, 특정 학과의 학생만 조회하거나, 학생들의 평균 성적을 계산하는 등의 작업을 SELECT 문으로 수행할 수 있습니다.",
+        text: "SELECT 문은 관계형 데이터베이스에서 데이터를 조회하는 기본 SQL 문입니다. 어떤 데이터를, 어떤 조건으로, 어떤 방식으로 조회할지 지정하는 역할을 하며, SQLD 시험에서도 핵심 개념 중 하나입니다.",
       },
       {
         type: "subtitle",
-        text: "기본 SELECT 문 구조",
-      },
-      {
-        type: "code",
-        text: `SELECT [DISTINCT] 컬럼1, 컬럼2, ... [AS 별칭]
-FROM 테이블명 [별칭]
-[WHERE 조건식]
-[GROUP BY 그룹화할_컬럼]
-[HAVING 그룹_조건식]
-[ORDER BY 정렬할_컬럼 [ASC|DESC]];`,
-      },
-      {
-        type: "subtitle",
-        text: "SELECT 문의 주요 절(clause)",
+        text: "학생 테이블 예시 데이터",
       },
       {
         type: "table",
-        headers: ["절", "설명", "사용 예시"],
+        headers: ["학번", "이름", "학과코드", "학년"],
+        rows: [
+          [101, "김철수", "CS", 2],
+          [102, "이영희", "CS", 3],
+          [103, "박민수", "EE", 1],
+          [104, "최수진", "CS", 2],
+          [105, "정다은", "ME", 4],
+          [106, "한지훈", "EE", 2],
+          [107, "오세훈", "ME", 1],
+        ],
+        caption: "학생 테이블 예시 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "기본 SELECT 문 예시 - 특정 컬럼 조회",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 학과코드 FROM 학생;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "학과코드"],
+        rows: [
+          ["김철수", "CS"],
+          ["이영희", "CS"],
+          ["박민수", "EE"],
+          ["최수진", "CS"],
+          ["정다은", "ME"],
+          ["한지훈", "EE"],
+          ["오세훈", "ME"],
+        ],
+        caption: "SELECT 이름, 학과코드 조회 결과",
+      },
+      {
+        type: "subtitle",
+        text: "SELECT 문의 기본 구조",
+      },
+      {
+        type: "code",
+        text: "SELECT [DISTINCT] 컬럼명 [AS 별칭], ...\nFROM 테이블명\n[WHERE 조건식]\n[GROUP BY 컬럼명]\n[HAVING 조건식]\n[ORDER BY 컬럼명 [ASC|DESC]];",
+      },
+      {
+        type: "subtitle",
+        text: "SELECT 문의 실행 순서와 주요 절 설명",
+      },
+      {
+        type: "list",
+        items: [
+          "FROM: 데이터를 가져올 테이블을 지정합니다.",
+          "WHERE: 행 단위 조건을 필터링합니다. (다음 컨텐츠에서 자세히 다룹니다)",
+          "GROUP BY: 데이터를 그룹으로 묶습니다. (다음 컨텐츠에서 자세히 다룹니다)",
+          "HAVING: 그룹화된 결과에 조건을 걸어 필터링합니다. (다음 컨텐츠에서 자세히 다룹니다)",
+          "SELECT: 조회할 컬럼과 집계 함수를 지정합니다.",
+          "DISTINCT: 중복된 행을 제거합니다.",
+          "ORDER BY: 결과를 정렬합니다. (다음 컨텐츠에서 자세히 다룹니다)",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "SELECT 문의 주요 절 역할 요약",
+      },
+      {
+        type: "table",
+        headers: ["절", "역할", "비고"],
         rows: [
           [
             "SELECT",
-            "조회할 컬럼을 지정",
-            "SELECT 학번, 이름, 학과코드 또는 SELECT *",
+            "조회할 컬럼 및 집계 함수 지정",
+            "별칭(AS), DISTINCT 사용 가능",
           ],
-          ["FROM", "데이터를 가져올 테이블 지정", "FROM 학생 또는 FROM 학생 S"],
+          ["FROM", "데이터를 가져올 테이블 지정", "테이블 별칭 사용 가능"],
           [
             "WHERE",
-            "조회할 행을 필터링하는 조건 지정",
-            "WHERE 학과코드 = 'CS'",
+            "행 단위 조건 필터링",
+            "집계 함수 조건 불가, 다음 컨텐츠 참고",
           ],
-          ["GROUP BY", "결과를 그룹화할 컬럼 지정", "GROUP BY 학과코드"],
+          [
+            "GROUP BY",
+            "데이터를 그룹으로 묶음",
+            "GROUP BY 대상 컬럼은 SELECT에도 포함, 다음 컨텐츠 참고",
+          ],
           [
             "HAVING",
-            "그룹화된 결과를 필터링하는 조건 지정",
-            "HAVING COUNT(*) > 5",
+            "그룹화 결과 조건 필터링",
+            "집계 함수 조건 가능, 다음 컨텐츠 참고",
           ],
-          ["ORDER BY", "결과를 정렬할 기준 컬럼 지정", "ORDER BY 이름 ASC"],
+          [
+            "ORDER BY",
+            "결과 정렬",
+            "ASC(오름차순) / DESC(내림차순), 다음 컨텐츠 참고",
+          ],
         ],
-        caption: "SELECT 문의 주요 절",
+        caption: "SELECT 문의 주요 절 역할",
       },
       {
         type: "subtitle",
-        text: "SELECT 문의 논리적 실행 순서",
+        text: "SELECT 문 작성 팁",
       },
       {
         type: "list",
         items: [
-          "1. FROM: 조회할 테이블 확인",
-          "2. WHERE: 조건에 맞는 행 필터링",
-          "3. GROUP BY: 지정된 컬럼으로 그룹화",
-          "4. HAVING: 그룹화된 결과 필터링",
-          "5. SELECT: 지정된 컬럼 선택",
-          "6. ORDER BY: 결과 정렬",
+          "필요한 컬럼만 명시하여 조회 성능을 높이세요.",
+          "WHERE 절을 활용해 데이터를 먼저 필터링하면 효율적입니다.",
+          "GROUP BY와 HAVING 절의 사용 순서를 지키세요.",
+          "ORDER BY 절은 결과 정렬을 위해 마지막에 사용됩니다.",
+          "별칭은 AS로 명확히 지정하면 가독성이 좋아집니다.",
         ],
       },
       {
         type: "paragraph",
-        text: "이 실행 순서를 이해하는 것은 SQL 쿼리를 작성하고 디버깅하는 데 매우 중요합니다. 예를 들어, SELECT 절에서 정의한 별칭은 WHERE 절에서 사용할 수 없지만 ORDER BY 절에서는 사용할 수 있습니다. 이는 SELECT 절이 WHERE 절 이후, ORDER BY 절 이전에 실행되기 때문입니다.",
+        text: "SELECT 문은 데이터 조회의 핵심입니다. 각 절의 역할과 실행 순서를 이해하면 복잡한 쿼리도 쉽게 작성할 수 있습니다.",
+      },
+    ],
+  },
+  "WHERE 절": {
+    title: "WHERE 절 (WHERE Clause)",
+    content: [
+      {
+        type: "paragraph",
+        text: "SQL에서 WHERE 절은 조건에 맞는 행(row)만 조회하거나 수정, 삭제할 때 사용하는 필터 역할을 합니다. SELECT, UPDATE, DELETE 문에서 자주 사용되며, 조건을 설정하지 않으면 전체 데이터가 대상이 돼요.",
+      },
+      {
+        type: "examples",
+        text: "예를 들어, 학생 테이블에서 이름이 '김철수'인 학생만 조회하고 싶다면 WHERE 절을 사용해서 해당 조건을 명시해야 합니다.",
       },
       {
         type: "subtitle",
-        text: "샘플 테이블 데이터",
+        text: "기본 사용법",
+      },
+      {
+        type: "code",
+        language: "sql",
+        text: "SELECT * FROM 학생 WHERE 이름 = '김철수';",
       },
       {
         type: "paragraph",
-        text: "다음 샘플 테이블을 사용하여 SELECT 문의 다양한 사용 예를 살펴봅시다.",
-      },
-      {
-        type: "table",
-        headers: ["학번", "이름", "학과코드", "학년", "생년월일"],
-        rows: [
-          ["2023001", "김철수", "CS", "1", "2004-05-10"],
-          ["2023002", "이영희", "MA", "1", "2004-08-15"],
-          ["2022001", "박지민", "CS", "2", "2003-01-22"],
-          ["2022002", "최유진", "PH", "2", "2003-11-07"],
-          ["2021001", "정민준", "CS", "3", "2002-03-30"],
-        ],
-        caption: "학생(STUDENT) 테이블",
-      },
-      {
-        type: "table",
-        headers: ["학과코드", "학과명", "위치", "전화번호"],
-        rows: [
-          ["CS", "컴퓨터공학과", "공학관 1층", "02-1234-5678"],
-          ["MA", "수학과", "이학관 2층", "02-1234-5679"],
-          ["PH", "물리학과", "이학관 3층", "02-1234-5680"],
-        ],
-        caption: "학과(DEPARTMENT) 테이블",
-      },
-      {
-        type: "table",
-        headers: ["수강번호", "학번", "과목코드", "년도", "학기", "성적"],
-        rows: [
-          ["1", "2023001", "CS101", "2023", "1", "95"],
-          ["2", "2023001", "MA101", "2023", "1", "88"],
-          ["3", "2023002", "MA101", "2023", "1", "92"],
-          ["4", "2022001", "CS102", "2023", "1", "90"],
-          ["5", "2022002", "PH101", "2023", "1", "85"],
-          ["6", "2021001", "CS201", "2023", "1", "93"],
-        ],
-        caption: "수강(ENROLLMENT) 테이블",
+        text: "위 쿼리는 '학생' 테이블에서 이름이 '김철수'인 행만 조회합니다.",
       },
       {
         type: "subtitle",
-        text: "1. 기본 SELECT 문",
-      },
-      {
-        type: "code",
-        text: `-- 모든 컬럼 조회
-SELECT * FROM 학생;
-
--- 특정 컬럼만 조회
-SELECT 학번, 이름, 학과코드 FROM 학생;
-
--- 컬럼에 별칭 부여
-SELECT 학번 AS 학생번호, 이름 AS 학생이름, 학과코드 FROM 학생;
-SELECT 학번 학생번호, 이름 학생이름, 학과코드 FROM 학생; -- AS 생략 가능`,
-      },
-      {
-        type: "subtitle",
-        text: "2. 조건절 (WHERE)",
-      },
-      {
-        type: "code",
-        text: `-- 특정 학과 학생만 조회
-SELECT * FROM 학생 WHERE 학과코드 = 'CS';
-
--- 여러 조건 사용 (AND, OR)
-SELECT * FROM 학생 WHERE 학과코드 = 'CS' AND 학년 = 1;
-SELECT * FROM 학생 WHERE 학과코드 = 'CS' OR 학과코드 = 'MA';
-
--- 비교 연산자 사용
-SELECT * FROM 학생 WHERE 학년 > 1;
-SELECT * FROM 학생 WHERE 생년월일 < '2004-01-01';
-
--- 특수 연산자 사용
-SELECT * FROM 학생 WHERE 학과코드 IN ('CS', 'MA'); -- IN 연산자
-SELECT * FROM 학생 WHERE 학년 BETWEEN 1 AND 2; -- BETWEEN 연산자
-SELECT * FROM 학생 WHERE 이름 LIKE '김%'; -- LIKE 연산자 (김으로 시작하는 이름)
-SELECT * FROM 학생 WHERE 학과코드 IS NOT NULL; -- NULL 검사`,
-      },
-      {
-        type: "subtitle",
-        text: "3. 정렬 (ORDER BY)",
-      },
-      {
-        type: "code",
-        text: `-- 이름 순으로 오름차순 정렬
-SELECT * FROM 학생 ORDER BY 이름 ASC;
-
--- 학년 내림차순, 이름 오름차순 정렬
-SELECT * FROM 학생 ORDER BY 학년 DESC, 이름 ASC;
-
--- 별칭으로 정렬
-SELECT 학번, 이름 AS 학생이름, 학과코드 FROM 학생 ORDER BY 학생이름;
-
--- 컬럼 위치로 정렬 (권장하지 않음)
-SELECT 학번, 이름, 학과코드 FROM 학생 ORDER BY 2; -- 이름으로 정렬`,
-      },
-      {
-        type: "subtitle",
-        text: "4. 중복 제거 (DISTINCT)",
-      },
-      {
-        type: "code",
-        text: `-- 중복 없이 학과코드만 조회
-SELECT DISTINCT 학과코드 FROM 학생;
-
--- 여러 컬럼의 조합에서 중복 제거
-SELECT DISTINCT 학과코드, 학년 FROM 학생;`,
-      },
-      {
-        type: "subtitle",
-        text: "5. 집계 함수와 그룹화 (GROUP BY, HAVING)",
-      },
-      {
-        type: "paragraph",
-        text: "그룹 함수는 여러 행의 데이터를 하나의 결과로 집계합니다. GROUP BY 절을 사용하면 특정 컬럼 값이 같은 행들을 그룹으로 묶을 수 있습니다.",
-      },
-      {
-        type: "code",
-        text: `-- 학과별 학생 수 조회
-SELECT 학과코드, COUNT(*) AS 학생수 FROM 학생 GROUP BY 학과코드;
-
--- 학과별, 학년별 학생 수 조회
-SELECT 학과코드, 학년, COUNT(*) AS 학생수 
-FROM 학생 
-GROUP BY 학과코드, 학년;
-
--- 학과별 평균 학년 조회
-SELECT 학과코드, AVG(학년) AS 평균학년 FROM 학생 GROUP BY 학과코드;
-
--- HAVING 절로 그룹 필터링
-SELECT 학과코드, COUNT(*) AS 학생수 
-FROM 학생 
-GROUP BY 학과코드 
-HAVING COUNT(*) > 1;
-
--- WHERE와 HAVING 함께 사용
-SELECT 학과코드, AVG(학년) AS 평균학년 
-FROM 학생 
-WHERE 생년월일 > '2003-01-01'
-GROUP BY 학과코드 
-HAVING AVG(학년) < 2;`,
-      },
-      {
-        type: "subtitle",
-        text: "6. 조인 (JOIN)",
-      },
-      {
-        type: "paragraph",
-        text: "조인은 둘 이상의 테이블에서 관련된 데이터를 함께 조회하는 방법입니다.",
-      },
-      {
-        type: "code",
-        text: `-- 내부 조인 (INNER JOIN)
-SELECT S.학번, S.이름, S.학과코드, D.학과명
-FROM 학생 S
-JOIN 학과 D ON S.학과코드 = D.학과코드;
-
--- 동등 조인 (= 내부 조인)
-SELECT S.학번, S.이름, S.학과코드, D.학과명
-FROM 학생 S, 학과 D
-WHERE S.학과코드 = D.학과코드;
-
--- 왼쪽 외부 조인 (LEFT OUTER JOIN)
-SELECT S.학번, S.이름, S.학과코드, D.학과명
-FROM 학생 S
-LEFT JOIN 학과 D ON S.학과코드 = D.학과코드;
-
--- 여러 테이블 조인
-SELECT S.학번, S.이름, D.학과명, E.과목코드, E.성적
-FROM 학생 S
-JOIN 학과 D ON S.학과코드 = D.학과코드
-JOIN 수강 E ON S.학번 = E.학번;`,
-      },
-      {
-        type: "subtitle",
-        text: "7. 서브쿼리 (Subquery)",
-      },
-      {
-        type: "paragraph",
-        text: "서브쿼리는 하나의 SQL 문 안에 포함된 또 다른 SQL 문입니다. 서브쿼리는 괄호 안에 작성하며, 메인 쿼리의 다양한 위치에서 사용할 수 있습니다.",
-      },
-      {
-        type: "code",
-        text: `-- WHERE 절에서 서브쿼리 사용
-SELECT 학번, 이름, 학과코드
-FROM 학생
-WHERE 학과코드 IN (SELECT 학과코드 FROM 학과 WHERE 위치 LIKE '%공학관%');
-
--- SELECT 절에서 서브쿼리 사용
-SELECT 학번, 이름, 
-       (SELECT 학과명 FROM 학과 WHERE 학과.학과코드 = 학생.학과코드) AS 학과명
-FROM 학생;
-
--- FROM 절에서 서브쿼리 사용 (인라인 뷰)
-SELECT A.학과코드, A.학과명, B.학생수
-FROM 학과 A,
-     (SELECT 학과코드, COUNT(*) AS 학생수 FROM 학생 GROUP BY 학과코드) B
-WHERE A.학과코드 = B.학과코드;`,
-      },
-      {
-        type: "subtitle",
-        text: "8. 집합 연산자 (Set Operators)",
-      },
-      {
-        type: "paragraph",
-        text: "집합 연산자는 두 개 이상의 SELECT 문 결과를 하나로 결합합니다.",
-      },
-      {
-        type: "code",
-        text: `-- UNION: 두 결과를 합치고 중복 제거
-SELECT 학번, 이름 FROM 학생 WHERE 학과코드 = 'CS'
-UNION
-SELECT 학번, 이름 FROM 학생 WHERE 학년 > 1;
-
--- UNION ALL: 두 결과를 합치고 중복 유지
-SELECT 학번, 이름 FROM 학생 WHERE 학과코드 = 'CS'
-UNION ALL
-SELECT 학번, 이름 FROM 학생 WHERE 학년 > 1;
-
--- INTERSECT: 두 결과의 교집합
-SELECT 학번, 이름 FROM 학생 WHERE 학과코드 = 'CS'
-INTERSECT
-SELECT 학번, 이름 FROM 학생 WHERE 학년 > 1;
-
--- MINUS/EXCEPT: 첫 번째 결과에서 두 번째 결과를 제외
-SELECT 학번, 이름 FROM 학생 WHERE 학과코드 = 'CS'
-MINUS
-SELECT 학번, 이름 FROM 학생 WHERE 학년 > 1;`,
-      },
-      {
-        type: "subtitle",
-        text: "9. 복합 쿼리 예제",
-      },
-      {
-        type: "paragraph",
-        text: "실제 업무에서는 다양한 SQL 기능을 조합하여 복잡한 쿼리를 작성하는 경우가 많습니다.",
-      },
-      {
-        type: "code",
-        text: `-- 각 학과별 평균 성적이 90점 이상인 학과 조회
-SELECT D.학과코드, D.학과명, AVG(E.성적) AS 평균성적
-FROM 학과 D
-JOIN 학생 S ON D.학과코드 = S.학과코드
-JOIN 수강 E ON S.학번 = E.학번
-GROUP BY D.학과코드, D.학과명
-HAVING AVG(E.성적) >= 90
-ORDER BY 평균성적 DESC;
-
--- 각 학생의 수강 과목 수와 평균 성적 조회
-SELECT S.학번, S.이름, S.학과코드, D.학과명,
-       COUNT(E.수강번호) AS 수강과목수,
-       AVG(E.성적) AS 평균성적
-FROM 학생 S
-JOIN 학과 D ON S.학과코드 = D.학과코드
-LEFT JOIN 수강 E ON S.학번 = E.학번
-GROUP BY S.학번, S.이름, S.학과코드, D.학과명
-ORDER BY 평균성적 DESC NULLS LAST;
-
--- 학과별 최고 성적 학생 조회 (서브쿼리와 조인 활용)
-SELECT D.학과코드, D.학과명, S.학번, S.이름, AVG(E.성적) AS 평균성적
-FROM 학과 D
-JOIN 학생 S ON D.학과코드 = S.학과코드
-JOIN 수강 E ON S.학번 = E.학번
-GROUP BY D.학과코드, D.학과명, S.학번, S.이름
-HAVING (D.학과코드, AVG(E.성적)) IN (
-    SELECT 학과코드, MAX(평균성적)
-    FROM (
-        SELECT S2.학과코드, S2.학번, AVG(E2.성적) AS 평균성적
-        FROM 학생 S2
-        JOIN 수강 E2 ON S2.학번 = E2.학번
-        GROUP BY S2.학과코드, S2.학번
-    )
-    GROUP BY 학과코드
-)
-ORDER BY D.학과코드;`,
-      },
-      {
-        type: "subtitle",
-        text: "10. SELECT 문 작성 시 주의사항",
+        text: "비교 연산자",
       },
       {
         type: "list",
         items: [
-          "항상 필요한 컬럼만 선택하기 (SELECT * 지양)",
-          "대용량 테이블 조회 시 적절한 WHERE 조건 사용하기",
-          "인덱스를 활용할 수 있는 조건 우선 사용하기",
-          "복잡한 조인과 서브쿼리는 성능에 영향을 줄 수 있음",
-          "GROUP BY 절에는 SELECT 절에 있는 집계함수가 아닌 모든 컬럼이 포함되어야 함",
-          "ORDER BY는 쿼리의 마지막에 실행되므로 SELECT 절의 별칭 사용 가능",
+          "= : 같음",
+          "!= 또는 <> : 같지 않음",
+          "> : 큼",
+          "< : 작음",
+          ">= : 크거나 같음",
+          "<= : 작거나 같음",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "논리 연산자",
+      },
+      {
+        type: "list",
+        items: [
+          "AND: 여러 조건이 모두 참일 때",
+          "OR: 하나라도 참이면 참",
+          "NOT: 조건의 부정을 의미",
+        ],
+      },
+      {
+        type: "code",
+        language: "sql",
+        text: "SELECT * FROM 학생 WHERE 학과 = '컴퓨터공학과' AND 학년 = 3;",
+      },
+      {
+        type: "paragraph",
+        text: "위 쿼리는 '컴퓨터공학과'이고, '3학년'인 학생만 조회합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "특수 조건 연산자",
+      },
+      {
+        type: "table",
+        headers: ["연산자", "설명", "예시"],
+        rows: [
+          [
+            "BETWEEN A AND B",
+            "A 이상 B 이하 범위 조건",
+            "나이 BETWEEN 20 AND 29",
+          ],
+          [
+            "IN (A, B, C)",
+            "여러 값 중 하나라도 일치",
+            "학과 IN ('컴공', '수학')",
+          ],
+          ["LIKE", "패턴 비교 (%, _ 사용)", "이름 LIKE '김%'"],
+          ["IS NULL", "NULL 값인지 확인", "전화번호 IS NULL"],
+        ],
+        caption: "자주 쓰이는 WHERE 절 연산자들",
+      },
+      {
+        type: "subtitle",
+        text: "LIKE 연산자 예시",
+      },
+      {
+        type: "list",
+        items: [
+          `"김%" → '김'으로 시작하는 값`,
+          `"__희" → 두 글자이고 마지막 글자가 '희'인 값`,
+          `"%철수%" → '철수'를 포함하는 값`,
+        ],
+      },
+      {
+        type: "code",
+        language: "sql",
+        text: "SELECT * FROM 학생 WHERE 이름 LIKE '%민%';",
+      },
+      {
+        type: "paragraph",
+        text: "이 쿼리는 이름에 '민'이 포함된 학생을 모두 조회합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "문자열은 따옴표('')로 감싸야 합니다.",
+          "NULL 값은 = 또는 != 연산자로 비교하지 않고 IS NULL 또는 IS NOT NULL을 사용해야 합니다.",
+          "조건이 복잡할 경우 괄호를 사용해서 연산자 우선순위를 명확히 해야 합니다.",
+        ],
+      },
+      {
+        type: "code",
+        language: "sql",
+        text: "SELECT * FROM 학생 WHERE (학과 = '컴퓨터공학과' OR 학과 = '수학과') AND 학년 = 2;",
+      },
+      {
+        type: "paragraph",
+        text: "이 쿼리는 컴퓨터공학과 또는 수학과에 속한 2학년 학생만 조회합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "요약",
+      },
+      {
+        type: "paragraph",
+        text: "WHERE 절은 SQL 쿼리에서 데이터를 필터링하는 매우 중요한 도구입니다. 다양한 조건과 연산자를 조합해서 원하는 데이터를 정교하게 조회할 수 있습니다.",
+      },
+    ],
+  },
+
+  "GROUP BY, HAVING 절": {
+    title: "GROUP BY / HAVING 절",
+    content: [
+      {
+        type: "paragraph",
+        text: "`GROUP BY` 절은 SELECT 문에서 집계 함수(예: COUNT, SUM, AVG 등)와 함께 사용되어 데이터를 그룹 단위로 묶는 데 사용됩니다. `HAVING` 절은 그룹화된 결과에 조건을 걸 때 사용하며, `WHERE` 절과는 달리 집계 함수 결과에 조건을 걸 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "직원 테이블 예시",
+      },
+      {
+        type: "table",
+        headers: ["사원ID", "이름", "부서", "급여"],
+        rows: [
+          [1, "김철수", "영업", 4000],
+          [2, "이영희", "영업", 4500],
+          [3, "박민수", "개발", 5000],
+          [4, "최수진", "개발", 5200],
+          [5, "정다은", "개발", 4800],
+          [6, "한지훈", "마케팅", 3900],
+          [7, "오세훈", "마케팅", 4100],
+          [8, "유지은", "영업", 4300],
+          [9, "강민지", "개발", 5100],
+          [10, "서지환", "개발", 5300],
+        ],
+        caption: "직원 테이블 데이터 예시",
+      },
+      {
+        type: "subtitle",
+        text: "GROUP BY 절 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 부서, COUNT(*) AS 인원수\nFROM 직원\nGROUP BY 부서;",
+      },
+      {
+        type: "table",
+        headers: ["부서", "인원수"],
+        rows: [
+          ["영업", 3],
+          ["개발", 5],
+          ["마케팅", 2],
+        ],
+        caption: "부서별 인원수",
+      },
+      {
+        type: "subtitle",
+        text: "HAVING 절 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 부서, COUNT(*) AS 인원수\nFROM 직원\nGROUP BY 부서\nHAVING COUNT(*) >= 3;",
+      },
+      {
+        type: "table",
+        headers: ["부서", "인원수"],
+        rows: [
+          ["영업", 3],
+          ["개발", 5],
+        ],
+        caption: "인원수가 3명 이상인 부서",
+      },
+      {
+        type: "subtitle",
+        text: "GROUP BY와 HAVING 절의 차이점",
+      },
+      {
+        type: "table",
+        headers: ["구분", "GROUP BY", "HAVING"],
+        rows: [
+          ["목적", "데이터를 그룹으로 묶기", "그룹화된 결과에 조건을 걸기"],
+          [
+            "사용 위치",
+            "`GROUP BY`는 `FROM` 다음에 위치",
+            "`HAVING`은 `GROUP BY` 다음에 위치",
+          ],
+          ["조건 대상", "그룹화 기준 컬럼", "집계 함수의 결과값"],
+          ["예시 조건", "`부서`", "`COUNT(*) >= 3`"],
+        ],
+        caption: "GROUP BY와 HAVING 절의 차이점",
+      },
+      {
+        type: "subtitle",
+        text: "주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "`SELECT` 절에 나오는 컬럼은 `GROUP BY` 절에 포함되거나, 집계 함수여야 함.",
+          "`HAVING` 절은 `GROUP BY` 없이도 집계 함수 조건에 사용할 수 있음.",
+          "`WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` 순으로 실행됨.",
+        ],
+      },
+    ],
+  },
+  "ORDER BY 절": {
+    title: "ORDER BY 절",
+    content: [
+      {
+        type: "paragraph",
+        text: "ORDER BY 절은 SQL에서 조회된 결과를 특정 컬럼을 기준으로 정렬할 때 사용하는 구문입니다. 기본값은 오름차순(ASC)이며, 내림차순(DESC)도 지정할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "학생 테이블 예시 데이터",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "학년"],
+        rows: [
+          [101, "김철수", "CS", 2],
+          [102, "이영희", "CS", 3],
+          [103, "박민수", "EE", 1],
+          [104, "최수진", "CS", 2],
+          [105, "정다은", "ME", 4],
+          [106, "한지훈", "EE", 2],
+          [107, "오세훈", "ME", 1],
+        ],
+        caption: "학생 테이블 예시 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "기본 ORDER BY 절 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 학년 FROM 학생 ORDER BY 학년 ASC;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "학년"],
+        rows: [
+          ["박민수", 1],
+          ["오세훈", 1],
+          ["김철수", 2],
+          ["최수진", 2],
+          ["한지훈", 2],
+          ["이영희", 3],
+          ["정다은", 4],
+        ],
+        caption: "학년 오름차순 정렬 결과",
+      },
+      {
+        type: "subtitle",
+        text: "ORDER BY 절 기본 구조",
+      },
+      {
+        type: "code",
+        text: "SELECT 컬럼명, ... FROM 테이블명 [WHERE 조건식] [GROUP BY 컬럼명] [HAVING 조건식] ORDER BY 컬럼명 [ASC|DESC], ...;",
+      },
+      {
+        type: "subtitle",
+        text: "ORDER BY 절의 역할과 특징",
+      },
+      {
+        type: "list",
+        items: [
+          "조회 결과를 지정한 컬럼을 기준으로 정렬합니다.",
+          "여러 컬럼을 지정하여 우선순위별 정렬이 가능합니다.",
+          "ASC는 오름차순 정렬, DESC는 내림차순 정렬을 의미합니다.",
+          "ORDER BY 절은 SQL 문에서 가장 마지막에 위치합니다.",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "SELECT 문의 주요 절 중 ORDER BY 위치",
+      },
+      {
+        type: "list",
+        items: [
+          "FROM: 데이터 원본 지정",
+          "WHERE: 행 필터링 (다음 컨텐츠에서 다룸)",
+          "GROUP BY: 그룹화 (다음 컨텐츠에서 다룸)",
+          "HAVING: 그룹 조건 필터링 (다음 컨텐츠에서 다룸)",
+          "SELECT: 조회 컬럼 지정",
+          "ORDER BY: 결과 정렬 (마지막 단계)",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "ORDER BY 절 작성 팁",
+      },
+      {
+        type: "list",
+        items: [
+          "정렬 기준 컬럼은 SELECT 절에 포함되어야 합니다.",
+          "별칭(AS)도 ORDER BY 절에서 사용할 수 있습니다.",
+          "여러 컬럼을 지정할 때는 쉼표(,)로 구분합니다.",
+          "복잡한 정렬 기준은 쿼리 가독성을 위해 주석 활용을 권장합니다.",
         ],
       },
       {
         type: "paragraph",
-        text: "SELECT 문은 SQL의 가장 기본적인 명령어지만 동시에 가장 강력하고 다양한 기능을 제공합니다. 복잡한 데이터 조회, 분석, 집계 등 다양한 요구사항을 충족할 수 있는 유연성을 가지고 있습니다. 효과적인 SELECT 문 작성을 위해서는 각 절의 기능과 실행 순서를 이해하고, 데이터베이스의 성능을 고려하여 적절한 쿼리를 설계하는 것이 중요합니다.",
+        text: "ORDER BY 절을 이해하고 적절히 활용하면 원하는 순서대로 데이터를 조회할 수 있어, 보고서 작성이나 데이터 분석에 매우 유용합니다.",
+      },
+    ],
+  },
+  조인: {
+    title: "조인 (JOIN)",
+    content: [
+      {
+        type: "paragraph",
+        text: "조인은 두 개 이상의 테이블을 연결하여 하나의 결과 집합으로 데이터를 조회할 때 사용하는 SQL 구문입니다. 관계형 데이터베이스에서 매우 중요한 개념으로, 관련된 데이터를 함께 볼 수 있도록 해줍니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학생(Student)",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드"],
+        rows: [
+          [101, "김철수", "CS"],
+          [102, "이영희", "CS"],
+          [103, "박민수", "EE"],
+          [104, "최수진", "ME"],
+        ],
+        caption: "학생(Student) 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학과(Department)",
+      },
+      {
+        type: "table",
+        headers: ["학과코드", "학과명", "학과장"],
+        rows: [
+          ["CS", "컴퓨터공학과", "홍길동"],
+          ["EE", "전기공학과", "김유신"],
+          ["ME", "기계공학과", "이순신"],
+        ],
+        caption: "학과(Department) 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "조인 쿼리 예시 (내부 조인 INNER JOIN)",
+      },
+      {
+        type: "code",
+        text: "SELECT S.학번, S.이름, D.학과명, D.학과장\nFROM 학생 S\nINNER JOIN 학과 D ON S.학과코드 = D.학과코드;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과명", "학과장"],
+        rows: [
+          [101, "김철수", "컴퓨터공학과", "홍길동"],
+          [102, "이영희", "컴퓨터공학과", "홍길동"],
+          [103, "박민수", "전기공학과", "김유신"],
+          [104, "최수진", "기계공학과", "이순신"],
+        ],
+        caption: "조인 결과: 학생과 학과 정보를 연결",
+      },
+      {
+        type: "subtitle",
+        text: "조인의 기본 구조",
+      },
+      {
+        type: "code",
+        text: "SELECT 컬럼명, ...\nFROM 테이블1\nJOIN 종류 테이블2 ON 조건;",
+      },
+      {
+        type: "paragraph",
+        text: "조인은 FROM 절 다음에 위치하며, JOIN 뒤에 조인 종류(INNER, LEFT, RIGHT, FULL 등)를 지정할 수 있습니다. ON 절에서는 두 테이블을 연결하는 조건을 명시합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "조인 종류와 역할 (다음 컨텐츠에서 자세히 다룸)",
+      },
+      {
+        type: "list",
+        items: [
+          "INNER JOIN: 양쪽 테이블에 모두 일치하는 데이터만 출력",
+          "LEFT JOIN: 왼쪽 테이블의 모든 데이터를 출력하며, 일치하지 않으면 NULL로 표시",
+          "RIGHT JOIN: 오른쪽 테이블의 모든 데이터를 출력하며, 일치하지 않으면 NULL로 표시",
+          "FULL OUTER JOIN: 양쪽 테이블 모두의 데이터를 모두 출력",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "조인은 복잡한 데이터 관계를 쉽게 표현하고, 여러 테이블의 데이터를 통합하여 조회할 때 필수적인 기능입니다.",
+      },
+    ],
+  },
+  "표준 조인": {
+    title: "표준 조인 (Standard JOIN)",
+    content: [
+      {
+        type: "paragraph",
+        text: "표준 조인은 SQL에서 가장 많이 사용되는 조인 방식으로, 두 개 이상의 테이블을 특정 조건으로 연결하여 데이터를 조회합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "조인 종류별 특징 및 예시",
+      },
+      {
+        type: "table",
+        headers: ["조인 종류", "설명"],
+        rows: [
+          ["INNER JOIN", "양쪽 테이블에 모두 존재하는 데이터만 조회"],
+          [
+            "LEFT OUTER JOIN",
+            "왼쪽 테이블의 모든 데이터와 일치하는 오른쪽 테이블 데이터를 조회, 일치하지 않으면 NULL",
+          ],
+          [
+            "RIGHT OUTER JOIN",
+            "오른쪽 테이블의 모든 데이터와 일치하는 왼쪽 테이블 데이터를 조회, 일치하지 않으면 NULL",
+          ],
+          [
+            "FULL OUTER JOIN",
+            "양쪽 테이블의 모든 데이터를 조회, 일치하지 않는 부분은 NULL",
+          ],
+        ],
+        caption: "표준 조인 종류와 특징",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학생(Student)",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드"],
+        rows: [
+          [101, "김철수", "CS"],
+          [102, "이영희", "CS"],
+          [103, "박민수", "EE"],
+          [104, "최수진", "ME"],
+          [105, "최민호", null],
+        ],
+        caption: "학생(Student) 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학과(Department)",
+      },
+      {
+        type: "table",
+        headers: ["학과코드", "학과명"],
+        rows: [
+          ["CS", "컴퓨터공학과"],
+          ["EE", "전기공학과"],
+          ["ME", "기계공학과"],
+          ["CE", "토목공학과"],
+        ],
+        caption: "학과(Department) 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "1. INNER JOIN 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT S.학번, S.이름, D.학과명\nFROM 학생 S\nINNER JOIN 학과 D ON S.학과코드 = D.학과코드;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과명"],
+        rows: [
+          [101, "김철수", "컴퓨터공학과"],
+          [102, "이영희", "컴퓨터공학과"],
+          [103, "박민수", "전기공학과"],
+          [104, "최수진", "기계공학과"],
+        ],
+        caption: "INNER JOIN 결과 (일치하는 데이터만)",
+      },
+      {
+        type: "subtitle",
+        text: "2. LEFT OUTER JOIN 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT S.학번, S.이름, D.학과명\nFROM 학생 S\nLEFT OUTER JOIN 학과 D ON S.학과코드 = D.학과코드;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과명"],
+        rows: [
+          [101, "김철수", "컴퓨터공학과"],
+          [102, "이영희", "컴퓨터공학과"],
+          [103, "박민수", "전기공학과"],
+          [104, "최수진", "기계공학과"],
+          [105, "최민호", null],
+        ],
+        caption: "LEFT OUTER JOIN 결과 (왼쪽 테이블 기준 모두 출력)",
+      },
+      {
+        type: "subtitle",
+        text: "3. RIGHT OUTER JOIN 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT S.학번, S.이름, D.학과명\nFROM 학생 S\nRIGHT OUTER JOIN 학과 D ON S.학과코드 = D.학과코드;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과명"],
+        rows: [
+          [101, "김철수", "컴퓨터공학과"],
+          [102, "이영희", "컴퓨터공학과"],
+          [103, "박민수", "전기공학과"],
+          [104, "최수진", "기계공학과"],
+          [null, null, "토목공학과"],
+        ],
+        caption: "RIGHT OUTER JOIN 결과 (오른쪽 테이블 기준 모두 출력)",
+      },
+      {
+        type: "subtitle",
+        text: "4. FULL OUTER JOIN 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT S.학번, S.이름, D.학과명\nFROM 학생 S\nFULL OUTER JOIN 학과 D ON S.학과코드 = D.학과코드;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과명"],
+        rows: [
+          [101, "김철수", "컴퓨터공학과"],
+          [102, "이영희", "컴퓨터공학과"],
+          [103, "박민수", "전기공학과"],
+          [104, "최수진", "기계공학과"],
+          [105, "최민호", null],
+          [null, null, "토목공학과"],
+        ],
+        caption: "FULL OUTER JOIN 결과 (양쪽 테이블 모두 포함)",
+      },
+      {
+        type: "paragraph",
+        text: "표준 조인은 테이블 간 데이터 관계를 명확히 하여 필요한 데이터를 효율적으로 조회할 수 있게 도와줍니다.",
+      },
+    ],
+  },
+  "서브 쿼리": {
+    title: "서브 쿼리 (Subquery)",
+    content: [
+      {
+        type: "paragraph",
+        text: "서브 쿼리는 하나의 SQL 문장 안에 포함된 또 다른 SELECT 문으로, 내부 쿼리가 먼저 실행되어 외부 쿼리에 결과를 제공합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "서브 쿼리의 사용 위치",
+      },
+      {
+        type: "list",
+        items: [
+          "SELECT 절 안에서 컬럼 값을 계산할 때",
+          "FROM 절 안에서 테이블처럼 사용될 때",
+          "WHERE 절이나 HAVING 절에서 조건으로 사용될 때",
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학생(Student)",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "성적"],
+        rows: [
+          [101, "김철수", "CS", 85],
+          [102, "이영희", "CS", 92],
+          [103, "박민수", "EE", 78],
+          [104, "최수진", "ME", 88],
+          [105, "최민호", "CS", 95],
+        ],
+        caption: "학생(Student) 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "1. WHERE 절에서 서브 쿼리 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 성적\nFROM 학생\nWHERE 성적 > (SELECT AVG(성적) FROM 학생);",
+      },
+      {
+        type: "table",
+        headers: ["이름", "성적"],
+        rows: [
+          ["이영희", 92],
+          ["최수진", 88],
+          ["최민호", 95],
+        ],
+        caption: "전체 학생 평균 성적 이상인 학생 조회 결과",
+      },
+      {
+        type: "subtitle",
+        text: "2. FROM 절에서 서브 쿼리 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 학과코드, 평균성적\nFROM (SELECT 학과코드, AVG(성적) AS 평균성적 FROM 학생 GROUP BY 학과코드) AS 학과성적;",
+      },
+      {
+        type: "table",
+        headers: ["학과코드", "평균성적"],
+        rows: [
+          ["CS", 90.67],
+          ["EE", 78],
+          ["ME", 88],
+        ],
+        caption: "학과별 평균 성적 조회 결과",
+      },
+      {
+        type: "subtitle",
+        text: "3. SELECT 절에서 서브 쿼리 사용 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 학과코드, (SELECT 학과명 FROM 학과 WHERE 학과.학과코드 = 학생.학과코드) AS 학과명\nFROM 학생;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "학과코드", "학과명"],
+        rows: [
+          ["김철수", "CS", "컴퓨터공학과"],
+          ["이영희", "CS", "컴퓨터공학과"],
+          ["박민수", "EE", "전기공학과"],
+          ["최수진", "ME", "기계공학과"],
+          ["최민호", "CS", "컴퓨터공학과"],
+        ],
+        caption: "SELECT 절에서 서브 쿼리로 학과명 조회 결과",
+      },
+      {
+        type: "paragraph",
+        text: "서브 쿼리를 활용하면 복잡한 조건이나 계산을 효율적으로 처리할 수 있으며, 쿼리를 모듈화해 가독성을 높이는 데 도움이 됩니다.",
+      },
+    ],
+  },
+  "집합 연산자": {
+    title: "집합 연산자 (Set Operators)",
+    content: [
+      {
+        type: "paragraph",
+        text: "집합 연산자는 두 개 이상의 SELECT 문의 결과 집합을 결합할 때 사용합니다. 결과는 중복 행을 처리하거나 포함 여부에 따라 다릅니다.",
+      },
+      {
+        type: "subtitle",
+        text: "주요 집합 연산자 종류",
+      },
+      {
+        type: "table",
+        headers: ["연산자", "설명", "중복 처리"],
+        rows: [
+          ["UNION", "두 결과 집합의 합집합. 중복된 행은 제거됨.", "중복 제거"],
+          [
+            "UNION ALL",
+            "두 결과 집합의 합집합. 중복된 행도 모두 포함.",
+            "중복 허용",
+          ],
+          [
+            "INTERSECT",
+            "두 결과 집합의 교집합. 양쪽 모두에 존재하는 행만 포함.",
+            "중복 제거",
+          ],
+          [
+            "EXCEPT (또는 MINUS)",
+            "첫 번째 집합에서 두 번째 집합에 있는 행을 제외한 결과.",
+            "중복 제거",
+          ],
+        ],
+        caption: "SQL 집합 연산자 종류와 특징",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: A 테이블",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[1], [2], [3]],
+        caption: "테이블 A",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: B 테이블",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[2], [3], [4]],
+        caption: "테이블 B",
+      },
+      {
+        type: "subtitle",
+        text: "1. UNION 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 번호 FROM A\nUNION\nSELECT 번호 FROM B;",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[1], [2], [3], [4]],
+        caption: "A와 B의 UNION 결과",
+      },
+      {
+        type: "subtitle",
+        text: "2. UNION ALL 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 번호 FROM A\nUNION ALL\nSELECT 번호 FROM B;",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[1], [2], [2], [3], [3], [4]],
+        caption: "A와 B의 UNION ALL 결과",
+      },
+      {
+        type: "subtitle",
+        text: "3. INTERSECT 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 번호 FROM A\nINTERSECT\nSELECT 번호 FROM B;",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[2], [3]],
+        caption: "A와 B의 INTERSECT 결과",
+      },
+      {
+        type: "subtitle",
+        text: "4. EXCEPT (또는 MINUS) 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 번호 FROM A\nEXCEPT\nSELECT 번호 FROM B;",
+      },
+      {
+        type: "table",
+        headers: ["번호"],
+        rows: [[1]],
+        caption: "A에서 B를 뺀 결과 (EXCEPT)",
+      },
+      {
+        type: "paragraph",
+        text: "집합 연산자는 두 SELECT 문의 컬럼 수와 데이터 타입이 일치해야 하며, 보통 결과 정렬에는 ORDER BY를 마지막에 한번만 사용합니다.",
+      },
+    ],
+  },
+  "그룹 함수": {
+    title: "그룹 함수 (Aggregate Functions)",
+    content: [
+      {
+        type: "paragraph",
+        text: "그룹 함수는 SQL에서 여러 행의 데이터를 집계하여 하나의 결과값을 만들어내는 함수입니다. 이를 통해 데이터베이스 내 대량의 데이터를 요약하거나 통계적인 정보를 추출할 수 있습니다. 대표적인 그룹 함수로는 COUNT, SUM, AVG, MAX, MIN 등이 있으며, 이 함수들은 각각 특정 컬럼의 행 개수, 합계, 평균, 최대값, 최소값을 계산할 때 사용됩니다.",
+      },
+      {
+        type: "paragraph",
+        text: "이러한 그룹 함수는 단독으로도 사용할 수 있지만, 주로 GROUP BY 절과 함께 사용하여 특정 그룹별로 집계 결과를 구할 때 매우 유용합니다. 예를 들어 부서별 직원 수, 판매액 합계, 평균 점수 등 다양한 집계 결과를 쉽게 구할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "주요 그룹 함수 종류와 설명",
+      },
+      {
+        type: "table",
+        headers: ["함수명", "설명", "예시"],
+        rows: [
+          [
+            "COUNT()",
+            "행의 개수를 세는 함수로, NULL 값을 제외하지 않고 전체 행 수를 계산하거나 특정 컬럼의 값이 존재하는 행 수를 셀 수 있음.",
+            "COUNT(*) - 전체 행 수 계산",
+          ],
+          [
+            "SUM()",
+            "수치형 컬럼의 값들을 모두 더해 합계를 반환함. NULL 값은 무시됨.",
+            "SUM(급여) - 급여 총합 계산",
+          ],
+          [
+            "AVG()",
+            "수치형 컬럼의 평균값을 계산함. SUM을 COUNT로 나눈 값과 같지만 NULL은 제외됨.",
+            "AVG(점수) - 평균 점수 계산",
+          ],
+          [
+            "MAX()",
+            "컬럼 내 가장 큰 값을 반환함. 날짜, 숫자, 문자열 등에서 사용할 수 있음.",
+            "MAX(생년월일) - 가장 늦은 생년월일 찾기",
+          ],
+          [
+            "MIN()",
+            "컬럼 내 가장 작은 값을 반환함. 날짜, 숫자, 문자열 등에서 사용할 수 있음.",
+            "MIN(점수) - 가장 낮은 점수 찾기",
+          ],
+        ],
+        caption: "주요 그룹 함수와 그 역할 및 예시",
+      },
+      {
+        type: "subtitle",
+        text: "예시 데이터: 직원 테이블",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여"],
+        rows: [
+          ["김철수", "개발", 5000],
+          ["이영희", "개발", 5500],
+          ["박민수", "영업", 4000],
+          ["최지은", "영업", 4200],
+          ["홍길동", "기획", 6000],
+        ],
+        caption: "직원 테이블 예시",
+      },
+      {
+        type: "subtitle",
+        text: "COUNT() 함수 사용 예",
+      },
+      {
+        type: "paragraph",
+        text: "전체 직원 수를 구하거나 특정 조건에 맞는 직원 수를 셀 때 사용합니다. 전체 행의 개수를 세려면 COUNT(*)를, 특정 컬럼의 값이 존재하는 행만 세려면 COUNT(컬럼명)을 사용합니다.",
+      },
+      {
+        type: "code",
+        text: "SELECT COUNT(*) AS 총직원수 FROM 직원;",
+      },
+      {
+        type: "table",
+        headers: ["총직원수"],
+        rows: [[5]],
+        caption: "직원 전체 수 결과",
+      },
+      {
+        type: "subtitle",
+        text: "SUM() 함수와 GROUP BY 절 활용 예",
+      },
+      {
+        type: "paragraph",
+        text: "부서별로 급여 총합을 계산할 때 주로 사용합니다. SUM() 함수는 그룹화된 각 부서에 대해 급여 합계를 계산하여 요약 정보를 제공합니다.",
+      },
+      {
+        type: "code",
+        text: "SELECT 부서, SUM(급여) AS 부서별_급여합계 FROM 직원 GROUP BY 부서;",
+      },
+      {
+        type: "table",
+        headers: ["부서", "부서별_급여합계"],
+        rows: [
+          ["개발", 10500],
+          ["영업", 8200],
+          ["기획", 6000],
+        ],
+        caption: "부서별 급여 합계",
+      },
+      {
+        type: "subtitle",
+        text: "AVG() 함수와 GROUP BY 절 활용 예",
+      },
+      {
+        type: "paragraph",
+        text: "부서별 평균 급여를 구하는 데 사용됩니다. AVG() 함수는 그룹별 급여의 평균값을 계산하여 각 부서의 급여 수준을 비교할 때 유용합니다.",
+      },
+      {
+        type: "code",
+        text: "SELECT 부서, AVG(급여) AS 부서별_평균급여 FROM 직원 GROUP BY 부서;",
+      },
+      {
+        type: "table",
+        headers: ["부서", "부서별_평균급여"],
+        rows: [
+          ["개발", 5250],
+          ["영업", 4100],
+          ["기획", 6000],
+        ],
+        caption: "부서별 평균 급여",
+      },
+      {
+        type: "paragraph",
+        text: "이처럼 그룹 함수는 데이터의 요약과 통계 분석에 필수적이며, 복잡한 대용량 데이터베이스에서도 빠르게 결과를 도출할 수 있도록 돕습니다.",
+      },
+      {
+        type: "paragraph",
+        text: "일반적으로 그룹 함수는 GROUP BY 절과 함께 사용되며, SELECT 절에는 그룹화 기준 컬럼과 집계 함수 결과가 함께 포함되어야 합니다. 그렇지 않으면 에러가 발생할 수 있으니 주의해야 합니다.",
+      },
+    ],
+  },
+  "윈도우 함수": {
+    title: "윈도우 함수 (Window Functions)",
+    content: [
+      {
+        type: "paragraph",
+        text: "윈도우 함수는 SQL에서 각 행에 대해 그룹화된 집계 값을 계산하면서도, 원본 행의 개별 데이터도 유지할 수 있도록 하는 강력한 기능입니다. 일반적인 그룹 함수와 달리 결과 집계 시 행들이 그룹으로 묶여 하나의 행으로 축소되지 않고, 각 행에 대해 계산된 집계 결과를 함께 반환합니다.",
+      },
+      {
+        type: "paragraph",
+        text: "윈도우 함수는 금융, 통계, 분석 등 다양한 분야에서 순위, 누적합, 이동평균 등 복잡한 계산을 수행할 때 매우 유용합니다. 데이터 집계와 함께 상세한 행 단위 정보도 함께 확인할 수 있어 데이터 분석에 필수적인 기능입니다.",
+      },
+      {
+        type: "subtitle",
+        text: "윈도우 함수 기본 문법",
+      },
+      {
+        type: "code",
+        text: "함수명() OVER (\n  [PARTITION BY 컬럼명]\n  [ORDER BY 컬럼명]\n  [ROWS/RANGE 프레임 지정]\n);",
+      },
+      {
+        type: "paragraph",
+        text: "`OVER` 절은 윈도우 함수에서 매우 중요한 부분으로, 데이터를 어떻게 나누고 정렬할지 정의합니다. `PARTITION BY`는 데이터를 그룹으로 나누는 역할을 하며, `ORDER BY`는 각 그룹 내에서 행의 순서를 지정합니다. 필요에 따라 `ROWS` 또는 `RANGE`를 지정하여 계산 범위를 조절할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "주요 윈도우 함수 종류",
+      },
+      {
+        type: "table",
+        headers: ["함수명", "설명", "예시"],
+        rows: [
+          [
+            "ROW_NUMBER()",
+            "파티션 내에서 행마다 고유 순번을 부여합니다.",
+            "각 부서별 직원 순번 생성",
+          ],
+          [
+            "RANK()",
+            "같은 값이 있을 경우 동일한 순위를 부여하고, 그 다음 순위는 건너뜁니다.",
+            "동점자 처리 시 순위 계산",
+          ],
+          [
+            "DENSE_RANK()",
+            "RANK()와 달리 순위 건너뛰지 않고 연속 순위를 부여합니다.",
+            "연속된 순위 부여",
+          ],
+          [
+            "SUM()/AVG()/MAX()/MIN() 등",
+            "윈도우 함수로 사용하여 누적합, 이동평균 등 계산 가능",
+            "부서별 누적 급여 합계 계산",
+          ],
+        ],
+        caption: "주요 윈도우 함수와 설명",
+      },
+      {
+        type: "subtitle",
+        text: "예시 데이터: 직원 테이블",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여"],
+        rows: [
+          ["김철수", "개발", 5000],
+          ["이영희", "개발", 5500],
+          ["박민수", "영업", 4000],
+          ["최지은", "영업", 4200],
+          ["홍길동", "기획", 6000],
+        ],
+        caption: "직원 테이블 예시",
+      },
+      {
+        type: "subtitle",
+        text: "ROW_NUMBER() 함수 사용 예",
+      },
+      {
+        type: "paragraph",
+        text: "각 부서별 직원에게 순번을 부여할 때 사용합니다. 부서별로 직원들을 순서대로 번호를 매길 수 있습니다.",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 부서, 급여,\n       ROW_NUMBER() OVER (PARTITION BY 부서 ORDER BY 급여 DESC) AS 부서내_순번\nFROM 직원;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여", "부서내_순번"],
+        rows: [
+          ["이영희", "개발", 5500, 1],
+          ["김철수", "개발", 5000, 2],
+          ["최지은", "영업", 4200, 1],
+          ["박민수", "영업", 4000, 2],
+          ["홍길동", "기획", 6000, 1],
+        ],
+        caption: "부서별 급여 내림차순으로 순번 부여 결과",
+      },
+      {
+        type: "subtitle",
+        text: "누적 합계 예시 (SUM() 윈도우 함수)",
+      },
+      {
+        type: "paragraph",
+        text: "부서별로 급여를 오름차순으로 정렬한 후 누적 합계를 계산할 때 사용합니다. 이는 해당 행까지의 급여 합계를 구하는 것입니다.",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 부서, 급여,\n       SUM(급여) OVER (PARTITION BY 부서 ORDER BY 급여 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적_급여\nFROM 직원;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여", "누적_급여"],
+        rows: [
+          ["김철수", "개발", 5000, 5000],
+          ["이영희", "개발", 5500, 10500],
+          ["박민수", "영업", 4000, 4000],
+          ["최지은", "영업", 4200, 8200],
+          ["홍길동", "기획", 6000, 6000],
+        ],
+        caption: "부서별 급여 누적 합계 결과",
+      },
+      {
+        type: "paragraph",
+        text: "윈도우 함수는 그룹 함수와 달리 데이터를 집계하면서도 원본 데이터를 그대로 유지해 분석과 보고서 작성에 매우 유용합니다. 복잡한 분석 쿼리를 작성할 때 꼭 알아두어야 할 SQL의 고급 기능입니다.",
+      },
+    ],
+  },
+  "TOP N 쿼리": {
+    title: "TOP N 쿼리",
+    content: [
+      {
+        type: "paragraph",
+        text: "TOP N 쿼리는 데이터베이스에서 가장 많이 사용되는 쿼리 중 하나로, 특정 조건에 맞는 데이터 중 상위 N개만을 조회할 때 사용됩니다. 예를 들어, 매출 상위 5개 상품, 급여 상위 10명의 직원, 최근 가입자 상위 3명 등을 조회할 때 매우 유용합니다. 이 쿼리는 대량의 데이터 중 필요한 일부만 빠르게 추출할 수 있어 성능 향상에도 기여합니다.",
+      },
+      {
+        type: "paragraph",
+        text: "각 데이터베이스 시스템에서는 TOP N을 구현하는 방식이 조금씩 다릅니다. 공통적으로는 결과를 정렬한 후, 그 중에서 일정 개수만 추출하는 방식입니다. 정렬이 반드시 필요한 이유는, 단순히 첫 N개의 행을 추출하면 원하는 의미의 '상위 N'이 보장되지 않기 때문입니다.",
+      },
+      {
+        type: "subtitle",
+        text: "주요 데이터베이스별 TOP N 쿼리 문법 차이",
+      },
+      {
+        type: "table",
+        headers: ["DBMS", "문법 예시", "설명"],
+        rows: [
+          [
+            "MySQL, PostgreSQL, SQLite",
+            "SELECT * FROM 테이블명 ORDER BY 컬럼명 DESC LIMIT N;",
+            "LIMIT 키워드를 사용해 상위 N개의 결과를 제한",
+          ],
+          [
+            "Oracle (12c 이상)",
+            "SELECT * FROM 테이블명 ORDER BY 컬럼명 DESC FETCH FIRST N ROWS ONLY;",
+            "FETCH FIRST 구문으로 결과 제한 가능",
+          ],
+          [
+            "Oracle (12c 이전)",
+            "SELECT * FROM (SELECT * FROM 테이블명 ORDER BY 컬럼명 DESC) WHERE ROWNUM <= N;",
+            "서브쿼리와 ROWNUM을 조합하여 상위 N개 결과 추출",
+          ],
+          [
+            "SQL Server",
+            "SELECT TOP N * FROM 테이블명 ORDER BY 컬럼명 DESC;",
+            "TOP 키워드를 사용해 상위 N개 행을 제한",
+          ],
+        ],
+        caption: "각 DBMS별 TOP N 쿼리 문법 비교",
+      },
+      {
+        type: "subtitle",
+        text: "TOP N 쿼리의 동작 원리",
+      },
+      {
+        type: "paragraph",
+        text: "TOP N 쿼리는 일반적으로 데이터 전체를 정렬한 후, 그 결과에서 상위 N개만 추출합니다. 따라서 정렬 컬럼의 선택이 매우 중요하며, 원하는 기준으로 정확히 정렬하지 않으면 잘못된 결과를 얻을 수 있습니다. 또한, 인덱스가 적절히 구축되어 있지 않으면 정렬과 추출 과정에서 성능 저하가 발생할 수 있으므로 주의해야 합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 직원",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여"],
+        rows: [
+          ["김철수", "개발", 5000],
+          ["이영희", "개발", 5500],
+          ["박민수", "영업", 4000],
+          ["최지은", "영업", 4200],
+          ["홍길동", "기획", 6000],
+          ["강민준", "기획", 5800],
+          ["이수진", "개발", 5300],
+        ],
+        caption: "직원 테이블 예시",
+      },
+      {
+        type: "subtitle",
+        text: "급여 상위 3명 조회 쿼리 (MySQL, PostgreSQL 등)",
+      },
+      {
+        type: "code",
+        text: "SELECT 이름, 부서, 급여\nFROM 직원\nORDER BY 급여 DESC\nLIMIT 3;",
+      },
+      {
+        type: "table",
+        headers: ["이름", "부서", "급여"],
+        rows: [
+          ["홍길동", "기획", 6000],
+          ["강민준", "기획", 5800],
+          ["이영희", "개발", 5500],
+        ],
+        caption: "급여 상위 3명 결과",
+      },
+      {
+        type: "subtitle",
+        text: "SQL Server에서 TOP N 쿼리 예",
+      },
+      {
+        type: "code",
+        text: "SELECT TOP 3 이름, 부서, 급여\nFROM 직원\nORDER BY 급여 DESC;",
+      },
+      {
+        type: "paragraph",
+        text: "SQL Server는 TOP 키워드를 사용해 제한 개수를 지정하며, ORDER BY 절과 함께 사용하여 원하는 순서대로 결과를 정렬합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "TOP N 쿼리 작성 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "ORDER BY 절 없이 LIMIT, TOP을 사용하면 어떤 데이터가 추출될지 예측할 수 없음",
+          "대량의 데이터에서 정렬 작업은 비용이 크므로 인덱스를 활용하여 성능 최적화 필요",
+          "동일한 값이 여러 개일 때 순서가 모호할 수 있으므로, 추가 정렬 기준을 명확히 지정하는 것이 좋음",
+          "Oracle 12c 이전 버전에서는 ROWNUM과 서브쿼리를 조합해 TOP N 구현 필요",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "TOP N 쿼리는 실무에서 매우 자주 사용되므로, 각 DBMS의 문법과 동작 방식을 명확히 이해하는 것이 중요합니다. 또한, 쿼리 성능 향상을 위해 적절한 인덱스 설계와 실행 계획 분석도 병행해야 합니다.",
+      },
+    ],
+  },
+  "계층형 질의와 셀프 조인": {
+    title: "계층형 질의와 셀프 조인",
+    content: [
+      {
+        type: "paragraph",
+        text: "계층형 질의는 데이터가 부모-자식 구조로 연결되어 있을 때, 그 관계를 탐색하고 조회하는 방법입니다. 예를 들어 회사 조직도, 제품 분류 체계, 댓글과 답글 구조 등이 계층형 데이터에 해당합니다. 이러한 구조를 SQL에서 효율적으로 다루기 위해 계층형 질의와 셀프 조인 기법이 필요합니다.",
+      },
+      {
+        type: "paragraph",
+        text: "셀프 조인은 같은 테이블을 두 번 이상 불러와 서로 다른 별칭(alias)을 붙여 조인하는 기법입니다. 특히 한 테이블 내에서 부모-자식 관계를 나타낼 때 주로 사용하며, 이를 통해 계층형 데이터를 연결하고 탐색할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "계층형 데이터의 특징과 구조",
+      },
+      {
+        type: "paragraph",
+        text: "계층형 데이터는 트리 구조와 같이 하나의 부모 노드가 여러 자식 노드를 가지며, 각 노드가 다시 부모 노드가 될 수 있는 형태입니다. 예를 들어 직원 테이블에서 각 직원은 자신의 상사를 가리키는 상사ID 컬럼을 가질 수 있습니다. 이 때, 상사-부하 관계가 부모-자식 관계가 됩니다.",
+      },
+      {
+        type: "subtitle",
+        text: "셀프 조인 기본 개념과 문법",
+      },
+      {
+        type: "paragraph",
+        text: "셀프 조인은 동일한 테이블을 두 개 이상 불러와 별칭(alias)을 붙이고, 각 별칭이 다른 역할을 하도록 합니다. 예를 들어 한 별칭은 직원 정보를, 다른 별칭은 그 직원의 상사 정보를 담도록 할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 직원 (EMPLOYEE)",
+      },
+      {
+        type: "table",
+        headers: ["사원ID", "이름", "상사ID"],
+        rows: [
+          [1, "홍길동", null],
+          [2, "김철수", 1],
+          [3, "이영희", 1],
+          [4, "박민수", 2],
+          [5, "최지은", 2],
+        ],
+        caption: "직원 테이블: 각 직원과 그 상사를 나타냄",
+      },
+      {
+        type: "subtitle",
+        text: "셀프 조인 예시: 직원과 상사 이름 함께 조회",
+      },
+      {
+        type: "code",
+        text: "SELECT E.이름 AS 직원, M.이름 AS 상사\nFROM EMPLOYEE E\nLEFT JOIN EMPLOYEE M ON E.상사ID = M.사원ID;",
+      },
+      {
+        type: "table",
+        headers: ["직원", "상사"],
+        rows: [
+          ["홍길동", null],
+          ["김철수", "홍길동"],
+          ["이영희", "홍길동"],
+          ["박민수", "김철수"],
+          ["최지은", "김철수"],
+        ],
+        caption: "셀프 조인으로 직원과 상사 관계를 함께 조회한 결과",
+      },
+      {
+        type: "paragraph",
+        text: "위 쿼리는 EMPLOYEE 테이블을 두 번 불러와 각각 E와 M이라는 별칭을 붙이고, E의 상사ID와 M의 사원ID가 같은 행을 연결하여 직원과 상사 이름을 동시에 보여줍니다. LEFT JOIN을 사용하여 상사가 없는 최고관리자도 결과에 포함합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "계층형 질의의 심화: 재귀 쿼리",
+      },
+      {
+        type: "paragraph",
+        text: "기본적인 셀프 조인은 한 단계의 부모-자식 관계를 조회할 때 유용하지만, 여러 단계의 계층을 모두 탐색하려면 재귀 쿼리를 사용해야 합니다. 예를 들어, SQL Server의 CTE(Common Table Expression) 또는 Oracle의 CONNECT BY 구문을 통해 재귀적으로 데이터를 조회할 수 있습니다.",
+      },
+      {
+        type: "paragraph",
+        text: "재귀 쿼리는 시작점(root)을 정하고, 그 부모 또는 자식 노드를 반복해서 찾는 방식으로 계층 전체를 탐색합니다. 이를 통해 조직도의 모든 하위 직원 또는 카테고리의 모든 하위 항목을 쉽게 조회할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "SQLD 시험과 실무에서의 중요성",
+      },
+      {
+        type: "paragraph",
+        text: "계층형 질의와 셀프 조인은 SQLD 자격증 시험의 중요한 출제 범위입니다. 기본 개념부터 시작해 재귀 쿼리 작성법까지 이해하는 것이 필요합니다. 실무에서도 조직도 관리, 제품 카테고리 관리, 댓글 시스템 구현 등 다양한 분야에서 계층형 데이터 처리가 필수적이므로 깊게 익혀두면 좋습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "학습 팁 및 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "테이블 내 자기 참조 관계 이해하기",
+          "셀프 조인 시 별칭 사용에 익숙해지기",
+          "기본 셀프 조인으로 1단계 부모-자식 관계 익히기",
+          "재귀 쿼리(CTE, CONNECT BY) 문법은 단계별로 학습",
+          "실제 조직도, 카테고리 데이터를 예시로 연습하기",
+          "쿼리 결과가 많아질 수 있으니 테스트 데이터로 충분히 연습하기",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "SQLD 준비하는 고등학생 여러분, 계층형 질의와 셀프 조인은 어려워 보일 수 있지만, 이해하고 연습하면 데이터베이스를 더 깊게 다룰 수 있게 됩니다. 천천히 차근차근 개념을 익히고, 여러 실습 문제로 실력을 쌓아가세요!",
+      },
+    ],
+  },
+  "PIVOT과 UNPIVOT 절": {
+    title: "PIVOT 절과 UNPIVOT 절",
+    content: [
+      {
+        type: "paragraph",
+        text: "PIVOT과 UNPIVOT 절은 SQL에서 데이터를 행과 열을 변환하는 데 사용되는 중요한 기능입니다. 이 기능들은 특히 보고서나 데이터 분석에서 데이터를 더 쉽게 이해하고 정리할 때 유용합니다. SQLD 자격증을 준비하는 고등학생 여러분도 꼭 알아야 할 개념입니다.",
+      },
+      {
+        type: "subtitle",
+        text: "PIVOT 절이란?",
+      },
+      {
+        type: "paragraph",
+        text: "PIVOT 절은 여러 행에 나누어져 있는 데이터를 하나의 행으로 합쳐서 열(column) 형태로 바꾸는 기능입니다. 예를 들어, 월별 판매량 데이터를 ‘월’별로 행에 나열하는 대신, ‘월’별 컬럼을 만들어 한 행에 데이터를 요약할 때 사용합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 월별 판매 데이터 (SALES)",
+      },
+      {
+        type: "table",
+        headers: ["제품명", "월", "판매량"],
+        rows: [
+          ["사과", "1월", 100],
+          ["사과", "2월", 150],
+          ["바나나", "1월", 200],
+          ["바나나", "2월", 180],
+        ],
+        caption: "원본 SALES 테이블: 제품별, 월별 판매량",
+      },
+      {
+        type: "subtitle",
+        text: "PIVOT 쿼리 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT *\nFROM (\n  SELECT 제품명, 월, 판매량\n  FROM SALES\n) AS SourceTable\nPIVOT (\n  SUM(판매량)\n  FOR 월 IN ([1월], [2월])\n) AS PivotTable;",
+      },
+      {
+        type: "table",
+        headers: ["제품명", "1월", "2월"],
+        rows: [
+          ["사과", 100, 150],
+          ["바나나", 200, 180],
+        ],
+        caption: "PIVOT 결과: 월별 판매량이 각각의 열로 변환됨",
+      },
+      {
+        type: "paragraph",
+        text: "위 쿼리는 SALES 테이블에서 제품별로 월별 판매량을 각각의 컬럼(1월, 2월)으로 펼쳐서 보여줍니다. SUM(판매량) 집계 함수를 사용하여 같은 제품의 월별 판매량을 합산합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "UNPIVOT 절이란?",
+      },
+      {
+        type: "paragraph",
+        text: "UNPIVOT 절은 PIVOT과 반대로, 여러 열로 나누어져 있는 데이터를 행(row) 형태로 바꾸는 기능입니다. 즉, 열에 있는 데이터를 다시 행으로 변환해 원래 형태처럼 보이게 합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 월별 판매량 피벗된 결과",
+      },
+      {
+        type: "table",
+        headers: ["제품명", "1월", "2월"],
+        rows: [
+          ["사과", 100, 150],
+          ["바나나", 200, 180],
+        ],
+        caption: "PIVOT 처리된 판매 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "UNPIVOT 쿼리 예시",
+      },
+      {
+        type: "code",
+        text: "SELECT 제품명, 월, 판매량\nFROM (\n  SELECT 제품명, [1월], [2월]\n  FROM PivotTable\n) AS PivotedData\nUNPIVOT (\n  판매량 FOR 월 IN ([1월], [2월])\n) AS UnpivotTable;",
+      },
+      {
+        type: "table",
+        headers: ["제품명", "월", "판매량"],
+        rows: [
+          ["사과", "1월", 100],
+          ["사과", "2월", 150],
+          ["바나나", "1월", 200],
+          ["바나나", "2월", 180],
+        ],
+        caption: "UNPIVOT 결과: 열이 다시 행으로 변환됨",
+      },
+      {
+        type: "paragraph",
+        text: "위 쿼리는 PIVOT 처리된 데이터를 다시 원래의 행 형태로 변환합니다. UNPIVOT 절에서는 FOR 뒤에 변환할 열 이름을 지정하며, 각 열이 행의 값으로 바뀝니다.",
+      },
+      {
+        type: "subtitle",
+        text: "PIVOT과 UNPIVOT의 활용 팁",
+      },
+      {
+        type: "list",
+        items: [
+          "보고서에서 열과 행의 형태를 바꿔야 할 때 사용합니다.",
+          "PIVOT은 데이터를 요약하거나 열 형태로 보고 싶을 때 적합합니다.",
+          "UNPIVOT은 데이터 정규화나 행 형태로 다시 분석하고자 할 때 유용합니다.",
+          "복잡한 데이터 변환 시, 먼저 원본 데이터를 잘 이해하는 것이 중요합니다.",
+        ],
+      },
+    ],
+  },
+  "정규 표현식": {
+    title: "정규 표현식 (Regular Expression)",
+    content: [
+      {
+        type: "paragraph",
+        text: "정규 표현식은 문자열에서 특정한 패턴을 찾아내거나, 검색, 치환, 검증 등에 사용하는 강력한 도구입니다. SQLD 자격증을 준비하는 고등학생이라면, 정규 표현식을 활용하여 복잡한 문자열 데이터를 효율적으로 다루는 방법을 이해하는 것이 중요합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "정규 표현식이란?",
+      },
+      {
+        type: "paragraph",
+        text: "정규 표현식은 문자들의 패턴을 표현하는 방식으로, 특정 조건을 만족하는 문자열을 찾기 위해 사용됩니다. 예를 들어, 이메일 형식, 전화번호 형식, 특정 단어 포함 여부 등을 쉽게 검사할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "정규 표현식 기본 구성요소",
+      },
+      {
+        type: "table",
+        headers: ["기호", "의미", "예시"],
+        rows: [
+          [" . ", "임의의 한 문자", "a.c는 abc, a1c, a-c 모두 매칭"],
+          [" * ", "0회 이상 반복", "ab*c는 ac, abc, abbc 모두 매칭"],
+          [" + ", "1회 이상 반복", "ab+c는 abc, abbc는 매칭, ac는 매칭 안 됨"],
+          [" ? ", "0회 또는 1회", "ab?c는 ac 또는 abc와 매칭"],
+          [" [abc] ", "괄호 안 문자 중 하나", "[abc]는 a, b, c 중 하나와 매칭"],
+          [
+            " [^abc] ",
+            "괄호 안 문자를 제외한 문자",
+            "[^abc]는 a,b,c를 제외한 문자 매칭",
+          ],
+          [" ^ ", "문자열 시작", "^abc는 'abc'로 시작하는 문자열"],
+          [" $ ", "문자열 끝", "abc$는 'abc'로 끝나는 문자열"],
+          [" \\d ", "숫자 (0~9)", "\\d는 숫자 한 자리"],
+          [" \\w ", "알파벳, 숫자, 밑줄", "\\w는 문자나 숫자 한 자리"],
+          [" \\s ", "공백 문자", "\\s는 공백, 탭, 줄바꿈 등"],
+          [" | ", "또는", "abc|def는 'abc' 또는 'def' 매칭"],
+        ],
+        caption: "정규 표현식 주요 메타 문자",
+      },
+      {
+        type: "subtitle",
+        text: "SQL에서 정규 표현식 활용",
+      },
+      {
+        type: "paragraph",
+        text: "SQL에서 정규 표현식을 직접 지원하는 함수는 DBMS마다 다르지만, 대표적으로 `REGEXP_LIKE` (Oracle), `RLIKE` (MySQL), `SIMILAR TO` (PostgreSQL) 등이 있습니다. 이를 통해 데이터베이스 내에서 패턴 검색을 할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "예시 1: 이메일 형식 검사",
+      },
+      {
+        type: "table",
+        caption: "사용자 테이블 예시",
+        headers: ["사용자ID", "이름", "이메일"],
+        rows: [
+          ["U01", "김철수", "chulsu.kim@example.com"],
+          ["U02", "이영희", "younghee.lee@domain"],
+          ["U03", "박민수", "minsu_park@example.co.kr"],
+          ["U04", "최지은", "jieun.choi@example.com"],
+          ["U05", "한나래", "hannarae@domain.com"],
+        ],
+      },
+      {
+        type: "code",
+        text: "-- Oracle SQL 예시: 이메일 형식이 올바른 데이터 조회\nSELECT 사용자ID, 이름, 이메일\nFROM 사용자\nWHERE REGEXP_LIKE(이메일, '^[\\w.-]+@[\\w.-]+\\.\\w{2,}$');",
+      },
+      {
+        type: "table",
+        caption: "쿼리 결과: 올바른 이메일 형식 데이터",
+        headers: ["사용자ID", "이름", "이메일"],
+        rows: [
+          ["U01", "김철수", "chulsu.kim@example.com"],
+          ["U03", "박민수", "minsu_park@example.co.kr"],
+          ["U04", "최지은", "jieun.choi@example.com"],
+          ["U05", "한나래", "hannarae@domain.com"],
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "예시 2: 전화번호 형식 검사",
+      },
+      {
+        type: "table",
+        caption: "고객 테이블 예시",
+        headers: ["고객ID", "이름", "전화번호"],
+        rows: [
+          ["C001", "박지훈", "010-1234-5678"],
+          ["C002", "한수민", "010-9876-5432"],
+          ["C003", "이도윤", "02-123-4567"],
+          ["C004", "정서연", "010-123-456"],
+          ["C005", "오민재", "010-1111-2222"],
+        ],
+      },
+      {
+        type: "code",
+        text: "-- MySQL 예시: 전화번호가 '010-xxxx-xxxx' 형식인지 검사\nSELECT 고객ID, 이름, 전화번호\nFROM 고객\nWHERE 전화번호 RLIKE '^010-[0-9]{4}-[0-9]{4}$';",
+      },
+      {
+        type: "table",
+        caption: "쿼리 결과: 올바른 전화번호 형식 데이터",
+        headers: ["고객ID", "이름", "전화번호"],
+        rows: [
+          ["C001", "박지훈", "010-1234-5678"],
+          ["C002", "한수민", "010-9876-5432"],
+          ["C005", "오민재", "010-1111-2222"],
+        ],
+      },
+      {
+        type: "subtitle",
+        text: "정규 표현식 사용 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "DBMS마다 정규 표현식 함수와 문법이 조금씩 다를 수 있으니 매뉴얼을 꼭 확인하세요.",
+          "복잡한 패턴을 다룰 때는 단계별로 테스트하며 작성하는 것이 좋습니다.",
+          "잘못된 정규 표현식은 성능 저하를 일으킬 수 있으니 주의하세요.",
+          "정규 표현식은 대소문자를 구분하기 때문에 필요 시 옵션을 설정해야 합니다.",
+        ],
+      },
+    ],
+  },
+  DML: {
+    title: "DML (Data Manipulation Language)",
+    content: [
+      {
+        type: "paragraph",
+        text: "DML은 데이터베이스에서 데이터를 실제로 조작하는 데 사용하는 SQL 명령어들을 말합니다. 즉, 데이터를 삽입(INSERT), 수정(UPDATE), 삭제(DELETE), 조회(SELECT)하는 데 필요한 구문들이 모두 포함됩니다. SQLD 자격증을 준비하는 고등학생이라면 DML을 잘 이해하고 활용하는 것이 매우 중요합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "DML의 주요 명령어",
+      },
+      {
+        type: "table",
+        headers: ["명령어", "역할", "설명"],
+        rows: [
+          ["INSERT", "데이터 삽입", "테이블에 새로운 행(row)을 추가할 때 사용"],
+          ["UPDATE", "데이터 수정", "기존 행의 특정 컬럼 값을 변경할 때 사용"],
+          ["DELETE", "데이터 삭제", "조건에 맞는 행을 삭제할 때 사용"],
+          [
+            "SELECT",
+            "데이터 조회",
+            "테이블에서 원하는 데이터를 검색할 때 사용",
+          ],
+        ],
+        caption: "DML 주요 명령어와 역할",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 학생(Student)",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과", "학년"],
+        rows: [
+          ["2023001", "김민수", "컴퓨터공학", 2],
+          ["2023002", "이영희", "전자공학", 1],
+          ["2023003", "박철수", "경영학", 3],
+        ],
+        caption: "초기 학생 테이블 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "INSERT - 데이터 삽입",
+      },
+      {
+        type: "paragraph",
+        text: "INSERT 명령어를 사용해 학생 테이블에 새로운 학생 정보를 추가할 수 있습니다.",
+      },
+      {
+        type: "code",
+        text: "INSERT INTO 학생 (학번, 이름, 학과, 학년) VALUES ('2023004', '최지은', '컴퓨터공학', 1);",
+      },
+      {
+        type: "paragraph",
+        text: "이 명령어를 실행하면 다음과 같이 데이터가 추가됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과", "학년"],
+        rows: [
+          ["2023001", "김민수", "컴퓨터공학", 2],
+          ["2023002", "이영희", "전자공학", 1],
+          ["2023003", "박철수", "경영학", 3],
+          ["2023004", "최지은", "컴퓨터공학", 1],
+        ],
+        caption: "INSERT 실행 후 학생 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "UPDATE - 데이터 수정",
+      },
+      {
+        type: "paragraph",
+        text: "UPDATE 명령어를 사용하여 특정 학생의 학년을 변경할 수 있습니다.",
+      },
+      {
+        type: "code",
+        text: "UPDATE 학생 SET 학년 = 2 WHERE 학번 = '2023002';",
+      },
+      {
+        type: "paragraph",
+        text: "이 명령어를 실행하면 이영희 학생의 학년이 1학년에서 2학년으로 변경됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과", "학년"],
+        rows: [
+          ["2023001", "김민수", "컴퓨터공학", 2],
+          ["2023002", "이영희", "전자공학", 2],
+          ["2023003", "박철수", "경영학", 3],
+          ["2023004", "최지은", "컴퓨터공학", 1],
+        ],
+        caption: "UPDATE 실행 후 학생 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "DELETE - 데이터 삭제",
+      },
+      {
+        type: "paragraph",
+        text: "DELETE 명령어를 사용하여 특정 학생의 데이터를 삭제할 수 있습니다.",
+      },
+      {
+        type: "code",
+        text: "DELETE FROM 학생 WHERE 학번 = '2023003';",
+      },
+      {
+        type: "paragraph",
+        text: "이 명령어를 실행하면 박철수 학생의 데이터가 삭제됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과", "학년"],
+        rows: [
+          ["2023001", "김민수", "컴퓨터공학", 2],
+          ["2023002", "이영희", "전자공학", 2],
+          ["2023004", "최지은", "컴퓨터공학", 1],
+        ],
+        caption: "DELETE 실행 후 학생 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "SELECT - 데이터 조회 (간단히)",
+      },
+      {
+        type: "paragraph",
+        text: "SELECT 명령어는 DML에서 데이터를 조회할 때 사용합니다. 상세 내용은 별도 컨텐츠에서 다루지만, DML의 기본 명령어임을 기억하세요.",
+      },
+      {
+        type: "paragraph",
+        text: "예를 들어, 학생 테이블에서 모든 학생을 조회하려면 `SELECT * FROM 학생;`를 사용합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "DML 작성 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "데이터를 변경하는 INSERT, UPDATE, DELETE는 실행 전에 꼭 조건을 확인하세요. 잘못 실행하면 데이터 손실이 발생할 수 있습니다.",
+          "UPDATE나 DELETE 시 조건절(WHERE)을 빼먹으면 전체 데이터가 변경/삭제될 수 있으니 주의해야 합니다.",
+          "INSERT 시 컬럼과 값의 순서를 정확히 맞춰야 오류가 발생하지 않습니다.",
+          "트랜잭션 처리(Commit, Rollback)를 알아두면 실수 시 복구할 수 있어 안전합니다.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "DML은 데이터베이스 조작의 핵심이므로 실습을 통해 여러 명령어를 익히고, 자주 연습하는 것이 SQLD 시험 합격에 큰 도움이 됩니다.",
+      },
+    ],
+  },
+  TCL: {
+    title: "TCL (Transaction Control Language)",
+    content: [
+      {
+        type: "paragraph",
+        text: "TCL은 데이터베이스에서 트랜잭션(transaction)을 제어하는 명령어를 말합니다. 트랜잭션은 하나의 작업 단위로, 여러 개의 SQL 명령어가 하나로 묶여서 실행됩니다. SQLD 자격증을 준비하는 고등학생이라면, 데이터베이스의 안전성과 일관성을 유지하기 위해 TCL 명령어를 잘 이해하는 것이 중요합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "트랜잭션이란?",
+      },
+      {
+        type: "paragraph",
+        text: "트랜잭션은 여러 작업이 모두 성공해야만 최종적으로 데이터베이스에 반영되는 작업 단위입니다. 만약 도중에 오류가 발생하면 모든 작업을 원래 상태로 되돌릴 수 있어야 합니다. 이를 통해 데이터의 무결성과 일관성을 보장할 수 있습니다.",
+      },
+      {
+        type: "subtitle",
+        text: "TCL 주요 명령어",
+      },
+      {
+        type: "table",
+        headers: ["명령어", "역할", "설명"],
+        rows: [
+          ["COMMIT", "트랜잭션 확정", "작업한 내용을 데이터베이스에 영구 저장"],
+          [
+            "ROLLBACK",
+            "트랜잭션 취소",
+            "작업한 내용을 모두 취소하고 이전 상태로 되돌림",
+          ],
+          [
+            "SAVEPOINT",
+            "중간 저장점 설정",
+            "트랜잭션 내에서 특정 지점을 저장하여 그 지점까지 롤백 가능",
+          ],
+          [
+            "SET TRANSACTION",
+            "트랜잭션 특성 설정",
+            "트랜잭션의 격리 수준 등을 설정",
+          ],
+        ],
+        caption: "TCL 주요 명령어와 역할",
+      },
+      {
+        type: "subtitle",
+        text: "예시 테이블: 계좌(Account)",
+      },
+      {
+        type: "table",
+        headers: ["계좌번호", "이름", "잔액"],
+        rows: [
+          ["1001", "김철수", 50000],
+          ["1002", "이영희", 30000],
+        ],
+        caption: "초기 계좌 테이블 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "COMMIT - 작업 확정",
+      },
+      {
+        type: "paragraph",
+        text: "트랜잭션 내에서 여러 작업을 수행한 뒤, 작업 결과를 데이터베이스에 영구 저장할 때 사용합니다.",
+      },
+      {
+        type: "code",
+        text: "-- 김철수 계좌에서 10000원 출금하고 이영희 계좌에 입금\nBEGIN TRANSACTION;\nUPDATE 계좌 SET 잔액 = 잔액 - 10000 WHERE 계좌번호 = '1001';\nUPDATE 계좌 SET 잔액 = 잔액 + 10000 WHERE 계좌번호 = '1002';\nCOMMIT;",
+      },
+      {
+        type: "paragraph",
+        text: "COMMIT이 실행되면 두 작업 모두 데이터베이스에 확정되어 잔액이 변경됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["계좌번호", "이름", "잔액"],
+        rows: [
+          ["1001", "김철수", 40000],
+          ["1002", "이영희", 40000],
+        ],
+        caption: "COMMIT 실행 후 계좌 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "ROLLBACK - 작업 취소",
+      },
+      {
+        type: "paragraph",
+        text: "트랜잭션 내에서 작업 중 오류가 발생하거나 작업을 취소하고 싶을 때 사용합니다.",
+      },
+      {
+        type: "code",
+        text: "-- 오류 발생으로 인해 작업 취소\nBEGIN TRANSACTION;\nUPDATE 계좌 SET 잔액 = 잔액 - 10000 WHERE 계좌번호 = '1001';\n-- 오류 발생\nROLLBACK;",
+      },
+      {
+        type: "paragraph",
+        text: "ROLLBACK이 실행되면 이전 상태로 돌아가서 잔액 변경이 취소됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["계좌번호", "이름", "잔액"],
+        rows: [
+          ["1001", "김철수", 50000],
+          ["1002", "이영희", 40000],
+        ],
+        caption: "ROLLBACK 실행 후 계좌 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "SAVEPOINT - 중간 저장점",
+      },
+      {
+        type: "paragraph",
+        text: "트랜잭션 내에서 특정 시점을 저장해두고, 그 시점까지만 롤백할 수 있게 하는 기능입니다.",
+      },
+      {
+        type: "code",
+        text: "BEGIN TRANSACTION;\nUPDATE 계좌 SET 잔액 = 잔액 - 10000 WHERE 계좌번호 = '1001';\nSAVEPOINT 중간점;\nUPDATE 계좌 SET 잔액 = 잔액 + 10000 WHERE 계좌번호 = '1002';\n-- 문제가 생기면 중간점까지 롤백\nROLLBACK TO 중간점;\nCOMMIT;",
+      },
+      {
+        type: "paragraph",
+        text: "이 경우 두 번째 업데이트는 취소되고, 첫 번째 업데이트만 최종 저장됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["계좌번호", "이름", "잔액"],
+        rows: [
+          ["1001", "김철수", 40000],
+          ["1002", "이영희", 30000],
+        ],
+        caption: "SAVEPOINT와 ROLLBACK TO 실행 후 계좌 테이블",
+      },
+      {
+        type: "subtitle",
+        text: "SET TRANSACTION - 트랜잭션 특성 설정",
+      },
+      {
+        type: "paragraph",
+        text: "트랜잭션의 격리 수준(isolation level) 등을 설정하여 동시성 제어나 데이터 일관성을 조절할 수 있습니다. SQLD 시험에서는 기본 개념 정도만 이해해도 충분합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "TCL 사용 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "COMMIT 후에는 롤백할 수 없으므로 작업 내용을 신중히 확인하세요.",
+          "ROLLBACK은 트랜잭션 내에서만 유효하며, 트랜잭션이 없으면 영향을 주지 않습니다.",
+          "트랜잭션은 데이터의 일관성과 무결성을 지키는 중요한 기능입니다. SQLD 시험에서는 트랜잭션의 기본 개념과 TCL 명령어 역할을 꼭 숙지하세요.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "TCL은 데이터베이스 작업의 안전성을 높이는 핵심 명령어 집합입니다. 실제로 여러 작업을 묶어 처리할 때 반드시 이해하고 활용할 줄 알아야 합니다.",
+      },
+    ],
+  },
+  DDL: {
+    title: "DDL (Data Definition Language)",
+    content: [
+      {
+        type: "paragraph",
+        text: "DDL은 데이터베이스에서 테이블, 인덱스, 뷰 등의 구조를 정의하거나 변경하는 데 사용하는 SQL 명령어입니다. SQLD 자격증을 준비하는 고등학생이라면 데이터베이스 구조를 만드는 방법과 이를 관리하는 기본 명령어를 잘 이해하는 것이 중요합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "DDL 주요 명령어",
+      },
+      {
+        type: "table",
+        headers: ["명령어", "역할", "설명"],
+        rows: [
+          [
+            "CREATE",
+            "객체 생성",
+            "테이블, 인덱스, 뷰 등 데이터베이스 객체를 새로 만듦",
+          ],
+          ["ALTER", "객체 변경", "기존 테이블에 컬럼 추가, 삭제 또는 수정"],
+          ["DROP", "객체 삭제", "테이블이나 인덱스 등 객체를 삭제"],
+          [
+            "TRUNCATE",
+            "데이터 삭제",
+            "테이블 내 모든 데이터를 빠르게 삭제 (구조는 유지)",
+          ],
+        ],
+        caption: "DDL 주요 명령어와 역할",
+      },
+      {
+        type: "subtitle",
+        text: "예시 1: CREATE TABLE",
+      },
+      {
+        type: "paragraph",
+        text: "학생 정보를 저장할 테이블을 생성하는 예시입니다.",
+      },
+      {
+        type: "code",
+        text: "CREATE TABLE 학생 (\n  학번 INT PRIMARY KEY,\n  이름 VARCHAR(50),\n  학과코드 VARCHAR(10),\n  입학년도 INT\n);",
+      },
+      {
+        type: "subtitle",
+        text: "예시 2: ALTER TABLE",
+      },
+      {
+        type: "paragraph",
+        text: "기존 학생 테이블에 전화번호 컬럼을 추가하는 예시입니다.",
+      },
+      {
+        type: "code",
+        text: "ALTER TABLE 학생 ADD 전화번호 VARCHAR(15);",
+      },
+      {
+        type: "subtitle",
+        text: "예시 3: DROP TABLE",
+      },
+      {
+        type: "paragraph",
+        text: "학생 테이블을 삭제하는 예시입니다.",
+      },
+      {
+        type: "code",
+        text: "DROP TABLE 학생;",
+      },
+      {
+        type: "subtitle",
+        text: "예시 4: TRUNCATE TABLE",
+      },
+      {
+        type: "paragraph",
+        text: "학생 테이블의 모든 데이터를 삭제하지만 테이블 구조는 유지합니다.",
+      },
+      {
+        type: "code",
+        text: "TRUNCATE TABLE 학생;",
+      },
+      {
+        type: "subtitle",
+        text: "초기 데이터 예시: 학생 테이블",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "입학년도"],
+        rows: [
+          [101, "김민수", "CS", 2023],
+          [102, "이영희", "EE", 2022],
+          [103, "박철호", "ME", 2023],
+        ],
+        caption: "학생 테이블 초기 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "ALTER TABLE 예시 결과",
+      },
+      {
+        type: "paragraph",
+        text: "전화번호 컬럼 추가 후, 데이터를 입력할 수 있습니다.",
+      },
+      {
+        type: "code",
+        text: "UPDATE 학생 SET 전화번호 = '010-1234-5678' WHERE 학번 = 101;",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "입학년도", "전화번호"],
+        rows: [
+          [101, "김민수", "CS", 2023, "010-1234-5678"],
+          [102, "이영희", "EE", 2022, null],
+          [103, "박철호", "ME", 2023, null],
+        ],
+        caption: "전화번호 컬럼 추가 후 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "TRUNCATE TABLE 실행 후 데이터",
+      },
+      {
+        type: "paragraph",
+        text: "TRUNCATE 명령어 실행 후 학생 테이블의 데이터는 모두 삭제됩니다.",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "입학년도", "전화번호"],
+        rows: [],
+        caption: "TRUNCATE 실행 후 학생 테이블 데이터 없음",
+      },
+      {
+        type: "subtitle",
+        text: "DDL 사용 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "DROP 명령어를 사용하면 테이블과 데이터가 완전히 삭제되어 복구가 어렵습니다.",
+          "ALTER로 컬럼을 삭제할 때는 데이터 손실에 주의하세요.",
+          "TRUNCATE는 DELETE보다 빠르지만, 롤백이 제한적입니다.",
+          "테이블 구조를 변경할 때는 데이터베이스 전체에 미치는 영향을 고려하세요.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "DDL은 데이터베이스 구조를 설계하고 관리하는 데 꼭 필요한 명령어입니다. SQLD 시험 준비를 위해 각 명령어의 역할과 결과를 충분히 연습해보세요.",
+      },
+    ],
+  },
+  DCL: {
+    title: "DCL (Data Control Language) - 데이터 제어 언어",
+    content: [
+      {
+        type: "paragraph",
+        text: "DCL은 데이터베이스에서 사용자 권한을 관리하고, 데이터에 대한 접근과 조작 권한을 제어하는 명령어입니다. SQLD 자격증을 준비하는 고등학생이라면, 데이터베이스 보안을 위해 누가 어떤 권한을 가질 수 있는지 정확히 이해하는 것이 중요합니다.",
+      },
+      {
+        type: "subtitle",
+        text: "DCL의 주요 명령어",
+      },
+      {
+        type: "table",
+        headers: ["명령어", "역할", "설명"],
+        rows: [
+          [
+            "GRANT",
+            "권한 부여",
+            "특정 사용자에게 데이터베이스 객체(테이블, 뷰 등)에 대한 권한을 부여함",
+          ],
+          ["REVOKE", "권한 회수", "사용자에게 부여한 권한을 취소함"],
+        ],
+        caption: "DCL의 주요 명령어",
+      },
+      {
+        type: "subtitle",
+        text: "예시 데이터: 학생 테이블",
+      },
+      {
+        type: "table",
+        headers: ["학번", "이름", "학과코드", "입학년도"],
+        rows: [
+          [101, "김민수", "CS", 2023],
+          [102, "이영희", "EE", 2022],
+          [103, "박철호", "ME", 2023],
+          [104, "최지은", "CS", 2021],
+        ],
+        caption: "학생 테이블 초기 데이터",
+      },
+      {
+        type: "subtitle",
+        text: "1. 권한 부여 (GRANT)",
+      },
+      {
+        type: "paragraph",
+        text: "관리자가 사용자 'user1'에게 학생 테이블의 데이터를 조회할 수 있는 SELECT 권한을 부여합니다.",
+      },
+      {
+        type: "code",
+        text: "GRANT SELECT ON 학생 TO user1;",
+      },
+      {
+        type: "paragraph",
+        text: "'user1'은 권한을 부여받기 전에는 학생 테이블 데이터를 조회할 수 없습니다. 권한 부여 후 조회가 가능합니다.",
+      },
+      {
+        type: "table",
+        headers: ["사용자", "작업", "권한 여부", "조회 결과"],
+        rows: [
+          [
+            "user1 (권한 없음)",
+            "SELECT * FROM 학생;",
+            "권한 없음",
+            "접근 거부 (에러 발생)",
+          ],
+          [
+            "user1 (권한 부여 후)",
+            "SELECT * FROM 학생;",
+            "권한 있음",
+            "데이터 정상 조회 가능",
+          ],
+        ],
+        caption: "권한 부여 전후의 조회 가능 여부",
+      },
+      {
+        type: "subtitle",
+        text: "2. 권한 회수 (REVOKE)",
+      },
+      {
+        type: "paragraph",
+        text: "관리자가 사용자 'user1'에게 부여한 SELECT 권한을 회수합니다.",
+      },
+      {
+        type: "code",
+        text: "REVOKE SELECT ON 학생 FROM user1;",
+      },
+      {
+        type: "paragraph",
+        text: "권한이 회수되면 'user1'은 다시 학생 테이블을 조회할 수 없습니다.",
+      },
+      {
+        type: "table",
+        headers: ["사용자", "작업", "권한 여부", "조회 결과"],
+        rows: [
+          [
+            "user1 (권한 회수 후)",
+            "SELECT * FROM 학생;",
+            "권한 없음",
+            "접근 거부 (에러 발생)",
+          ],
+        ],
+        caption: "권한 회수 후 조회 불가",
+      },
+      {
+        type: "subtitle",
+        text: "DCL 사용 시 주의사항",
+      },
+      {
+        type: "list",
+        items: [
+          "권한은 최소한으로 부여하여 데이터 보안을 강화해야 합니다.",
+          "권한 회수 시, 해당 사용자가 수행하던 작업이 중단되지 않도록 신중하게 처리해야 합니다.",
+          "GRANT, REVOKE 명령어는 데이터베이스 관리자(DBA) 또는 권한이 있는 사용자만 실행할 수 있습니다.",
+          "SQLD 시험에서는 기본 문법과 역할 이해가 중요하며, 실제 상황에서 어떤 명령어를 사용하는지 숙지해야 합니다.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "DCL은 데이터베이스의 보안과 권한 관리를 담당하는 중요한 명령어입니다. SQLD 자격증 준비 시 꼭 익혀야 할 영역이며, 실무에서도 매우 자주 사용됩니다.",
       },
     ],
   },
