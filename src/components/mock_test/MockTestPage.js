@@ -1,10 +1,12 @@
+/** @format */
+
 import styled from "styled-components";
-import { exam1, exam2 } from "../../data/mock_exam";
-import { useState, useEffect, useRef } from "react";
+import {exam1, exam2} from "../../data/mock_exam";
+import {useState, useEffect, useRef} from "react";
 import MockTestSidebar from "./MockTestSidebar";
 import QuestionDisplay from "./QuestionDisplay";
 import MockTestTimer from "./MockTestTimer";
-import MobileHeader, { MobileHeaderSpacer } from "../layout/MobileHeader";
+import MobileHeader, {MobileHeaderSpacer} from "../layout/MobileHeader";
 import MockTestResults from "./MockTestResults";
 
 const MockTestPageContainer = styled.div`
@@ -26,7 +28,7 @@ const TestSelectionContainer = styled.div`
   height: 100%;
   width: 100%;
   padding: 20px;
-  
+
   @media (max-width: 768px) {
     padding: 15px;
   }
@@ -37,12 +39,12 @@ const TestSelectionHeading = styled.h1`
   margin-bottom: 30px;
   font-family: "IBM Plex Sans", sans-serif;
   text-align: center;
-  
+
   @media (max-width: 768px) {
     font-size: 24px;
     margin-bottom: 20px;
   }
-  
+
   @media (max-width: 480px) {
     font-size: 20px;
   }
@@ -65,7 +67,7 @@ const TestRouteBtn = styled.button`
   &:hover {
     background-color: rgba(35, 149, 233, 0.4);
   }
-  
+
   @media (max-width: 768px) {
     width: 90%;
     max-width: 280px;
@@ -77,11 +79,11 @@ const TestRouteBtn = styled.button`
 const StartButton = styled(TestRouteBtn)`
   background-color: rgba(35, 149, 233, 0.6);
   margin-top: 30px;
-  
+
   &:hover {
     background-color: rgba(35, 149, 233, 0.8);
   }
-  
+
   @media (max-width: 768px) {
     margin-top: 20px;
   }
@@ -99,12 +101,12 @@ const ContentContainer = styled.div`
   padding: 20px;
   transition: margin-left 0.3s ease;
   margin-left: ${(props) => (props.sidebarVisible ? "350px" : "0")};
-  
+
   @media (max-width: 1200px) {
     padding: 16px;
     margin-left: ${(props) => (props.sidebarVisible ? "350px" : "0")};
   }
-  
+
   @media (max-width: 768px) {
     padding: 16px 12px;
     margin-left: 0;
@@ -129,15 +131,15 @@ const ShowSidebarButton = styled.button`
   z-index: 50;
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 500;
-  
+
   &:hover {
     background-color: rgba(35, 149, 233, 0.6);
   }
-  
+
   svg {
     margin-right: 8px;
   }
-  
+
   @media (max-width: 768px) {
     top: 10px;
     left: 10px;
@@ -146,10 +148,9 @@ const ShowSidebarButton = styled.button`
   }
 `;
 
-
 const MobileTopBar = styled.div`
   display: none;
-  
+
   @media (max-width: 768px) {
     display: flex;
     position: fixed;
@@ -182,13 +183,13 @@ const MobileQuestionScroller = styled.div`
   margin-top: 8px;
   gap: 6px;
   width: 100%;
-  
+
   /* 스크롤바 숨기기 */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
   &::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera */
+    display: none; /* Chrome, Safari, Opera */
   }
 `;
 
@@ -198,13 +199,12 @@ const MobileQuestionDot = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${props => 
-    props.isCurrent 
-      ? 'rgba(35, 149, 233, 0.7)' 
-      : props.isAnswered 
-        ? 'rgba(60, 179, 113, 0.4)' 
-        : 'rgba(215, 223, 228, 0.08)'
-  };
+  background-color: ${(props) =>
+    props.isCurrent
+      ? "rgba(35, 149, 233, 0.7)"
+      : props.isAnswered
+      ? "rgba(60, 179, 113, 0.4)"
+      : "rgba(215, 223, 228, 0.08)"};
   border-radius: 18px;
   color: #d7dfe5;
   font-weight: 600;
@@ -222,11 +222,10 @@ const MobileTestTitle = styled.div`
   font-size: 14px;
 `;
 
-
 // MobileTopBar 높이만큼 공간을 확보하는 스페이서
 const MobileTopBarSpacer = styled.div`
   display: none;
-  
+
   @media (max-width: 768px) {
     display: block;
     height: auto; /* 자동 높이로 변경 */
@@ -242,32 +241,32 @@ const ResultContainer = styled.div`
   margin-top: 20px;
   color: #d7dfe5;
   font-family: "IBM Plex Sans", sans-serif;
-  
+
   h2 {
     color: #2395e9;
     margin-bottom: 15px;
     font-weight: 700;
   }
-  
+
   p {
     margin-bottom: 8px;
     padding: 8px;
     border-radius: 6px;
-    
+
     &:hover {
       background: rgba(215, 223, 228, 0.05);
     }
   }
-  
+
   @media (max-width: 768px) {
     padding: 16px;
     margin-top: 16px;
-    
+
     h2 {
       font-size: 18px;
       margin-bottom: 12px;
     }
-    
+
     p {
       font-size: 14px;
       margin-bottom: 6px;
@@ -284,10 +283,10 @@ const useMobileDetection = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return isMobile;
@@ -303,10 +302,10 @@ const MockTestPage = () => {
   const [timeLeft, setTimeLeft] = useState(90 * 60); // 90분을 초 단위로
   const [testFinished, setTestFinished] = useState(false);
   const [showResultsPage, setShowResultsPage] = useState(false);
-  
+
   const timerRef = useRef(null);
   const mobileQuestionScrollRef = useRef(null);
-  
+
   // 모바일 감지 추가
   const isMobile = useMobileDetection();
 
@@ -317,10 +316,10 @@ const MockTestPage = () => {
       setUserAnswers(new Array(selectedTest.length).fill(null));
       setTestFinished(false);
       setShowResultsPage(false);
-      
+
       // 타이머 시작
       timerRef.current = setInterval(() => {
-        setTimeLeft(prev => {
+        setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timerRef.current);
             setTestFinished(true);
@@ -346,18 +345,18 @@ const MockTestPage = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768 && sidebarVisible) {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = "auto";
       }
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      window.removeEventListener('resize', handleResize);
-      document.body.style.overflow = 'auto';
+      window.removeEventListener("resize", handleResize);
+      document.body.style.overflow = "auto";
     };
   }, [sidebarVisible]);
 
@@ -366,17 +365,18 @@ const MockTestPage = () => {
     if (mobileQuestionScrollRef.current && window.innerWidth <= 768) {
       const scrollContainer = mobileQuestionScrollRef.current;
       const selectedElement = scrollContainer.children[currentQuestion];
-      
+
       if (selectedElement) {
         const containerWidth = scrollContainer.offsetWidth;
         const elementLeft = selectedElement.offsetLeft;
         const elementWidth = selectedElement.offsetWidth;
-        
+
         // 중앙 정렬 스크롤 계산
-        const scrollPosition = elementLeft - (containerWidth / 2) + (elementWidth / 2);
+        const scrollPosition =
+          elementLeft - containerWidth / 2 + elementWidth / 2;
         scrollContainer.scrollTo({
           left: scrollPosition,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     }
@@ -392,7 +392,7 @@ const MockTestPage = () => {
   // 문제 이동 함수
   const goToQuestion = (index) => {
     setCurrentQuestion(index);
-    
+
     // 모바일에서 문제 선택 시 사이드바 닫기
     if (window.innerWidth <= 768) {
       setSidebarVisible(false);
@@ -405,7 +405,7 @@ const MockTestPage = () => {
     setTestFinished(true);
     setShowResultsPage(true);
   };
-  
+
   // 모의고사 선택 화면으로 돌아가기
   const handleReturnToSelection = () => {
     setActiveTest(null);
@@ -426,14 +426,14 @@ const MockTestPage = () => {
   // 시험 결과 계산
   const calculateResults = () => {
     if (!testFinished || !activeTest) return null;
-    
+
     let correctCount = 0;
     activeTest.forEach((question, idx) => {
       if (userAnswers[idx] === question.answer) {
         correctCount++;
       }
     });
-    
+
     return {
       totalQuestions: activeTest.length,
       correctAnswers: correctCount,
@@ -451,24 +451,26 @@ const MockTestPage = () => {
         <TestSelectionContainer>
           <TestSelectionHeading>실전 모의고사 선택</TestSelectionHeading>
           {testList.map((exam, idx) => (
-            <TestRouteBtn 
-              key={idx} 
+            <TestRouteBtn
+              key={idx}
               onClick={() => setSelectedTest(exam)}
-              style={selectedTest === exam ? { backgroundColor: 'rgba(35, 149, 233, 0.4)' } : {}}
+              style={
+                selectedTest === exam
+                  ? {backgroundColor: "rgba(35, 149, 233, 0.4)"}
+                  : {}
+              }
             >
               {`${idx + 1}회 실전 모의고사`}
             </TestRouteBtn>
           ))}
           {selectedTest && (
-            <StartButton onClick={startTest}>
-              모의고사 시작하기
-            </StartButton>
+            <StartButton onClick={startTest}>모의고사 시작하기</StartButton>
           )}
         </TestSelectionContainer>
       </MockTestPageContainer>
     );
   }
-  
+
   // 결과 페이지 표시
   if (testFinished && showResultsPage && results) {
     return (
@@ -476,7 +478,7 @@ const MockTestPage = () => {
         <MobileHeader />
         <MobileHeaderSpacer />
         <ContentContainer sidebarVisible={false}>
-          <MockTestResults 
+          <MockTestResults
             questions={activeTest}
             userAnswers={userAnswers}
             totalQuestions={results.totalQuestions}
@@ -496,7 +498,7 @@ const MockTestPage = () => {
       <TestContainer>
         {/* 데스크탑 모드에서만 사이드바 표시 */}
         {!isMobile && sidebarVisible ? (
-          <MockTestSidebar 
+          <MockTestSidebar
             questions={activeTest}
             currentQuestion={currentQuestion}
             userAnswers={userAnswers}
@@ -505,30 +507,56 @@ const MockTestPage = () => {
             timeLeft={timeLeft}
             toggleSidebar={toggleSidebar}
           />
-        ) : !isMobile && (
-          <ShowSidebarButton onClick={toggleSidebar}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 4C1 2.34315 2.34315 1 4 1H12C13.6569 1 15 2.34315 15 4V12C15 13.6569 13.6569 15 12 15H4C2.34315 15 1 13.6569 1 12V4Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M5 1V15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            사이드바 표시
-          </ShowSidebarButton>
+        ) : (
+          !isMobile && (
+            <ShowSidebarButton onClick={toggleSidebar}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 4C1 2.34315 2.34315 1 4 1H12C13.6569 1 15 2.34315 15 4V12C15 13.6569 13.6569 15 12 15H4C2.34315 15 1 13.6569 1 12V4Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M5 1V15"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              사이드바 표시
+            </ShowSidebarButton>
+          )
         )}
-            
+
         {/* 모바일 모드에서는 항상 탑바 표시 */}
         {isMobile && (
           <>
             {/* 모바일 전용 상단 바 */}
             <MobileTopBar>
               <MobileTopBarContent>
-                <MobileTestTitle>실전 모의고사 {testList.indexOf(activeTest) + 1}회</MobileTestTitle>
-                <MockTestTimer timeLeft={timeLeft} isTopBar={true} sidebarVisible={false} /> 
+                <MobileTestTitle>
+                  실전 모의고사 {testList.indexOf(activeTest) + 1}회
+                </MobileTestTitle>
+                <MockTestTimer
+                  timeLeft={timeLeft}
+                  isTopBar={true}
+                  sidebarVisible={false}
+                />
               </MobileTopBarContent>
-              
+
               <MobileQuestionScroller ref={mobileQuestionScrollRef}>
                 {activeTest.map((_, index) => (
-                  <MobileQuestionDot 
-                    key={index} 
+                  <MobileQuestionDot
+                    key={index}
                     isCurrent={index === currentQuestion}
                     isAnswered={userAnswers[index] !== null}
                     onClick={() => goToQuestion(index)}
@@ -541,21 +569,28 @@ const MockTestPage = () => {
             <MobileTopBarSpacer />
           </>
         )}
-        
+
         <ContentContainer sidebarVisible={!isMobile && sidebarVisible}>
-          <QuestionDisplay 
+          <QuestionDisplay
             question={activeTest[currentQuestion]}
             questionIndex={currentQuestion}
             totalQuestions={activeTest.length}
             selectedAnswer={userAnswers[currentQuestion]}
-            onAnswerSelect={(answer) => handleAnswerSelect(currentQuestion, answer)}
-            onPrevious={() => currentQuestion > 0 && setCurrentQuestion(currentQuestion - 1)}
-            onNext={() => currentQuestion < activeTest.length - 1 && setCurrentQuestion(currentQuestion + 1)}
+            onAnswerSelect={(answer) =>
+              handleAnswerSelect(currentQuestion, answer)
+            }
+            onPrevious={() =>
+              currentQuestion > 0 && setCurrentQuestion(currentQuestion - 1)
+            }
+            onNext={() =>
+              currentQuestion < activeTest.length - 1 &&
+              setCurrentQuestion(currentQuestion + 1)
+            }
             onSubmit={submitTest}
             isLast={currentQuestion === activeTest.length - 1}
             testFinished={testFinished}
           />
-          
+
           {testFinished && !showResultsPage && results && (
             <ResultContainer>
               <h2>모의고사 결과</h2>

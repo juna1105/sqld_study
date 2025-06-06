@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+/** @format */
+
+import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 import Sidebar from "../layout/Sidebar";
-import MobileHeader, { MobileHeaderSpacer } from "../layout/MobileHeader";
 
 // 모바일 환경 감지
 const useMobileDetection = () => {
@@ -11,10 +12,10 @@ const useMobileDetection = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return isMobile;
@@ -23,20 +24,17 @@ const useMobileDetection = () => {
 const StudyPageContainer = styled.div`
   display: flex;
   width: 100%;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
-
-
-
 // 모바일 탑 내비게이션
 const MobileTopicNav = styled.div`
   display: none;
   position: relative;
-  
+
   @media (max-width: 768px) {
     display: flex;
     align-items: center;
@@ -45,7 +43,7 @@ const MobileTopicNav = styled.div`
     overflow-x: visible;
     white-space: nowrap;
     margin-bottom: 10px;
-    
+
     /* 스크롤바 숨기기 */
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -58,7 +56,7 @@ const MobileTopicNav = styled.div`
 const TopicIcon = styled.div`
   width: 24px;
   height: 24px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -69,16 +67,15 @@ const TopicIcon = styled.div`
 const DropdownIcon = styled.div`
   margin-left: 8px;
   transition: transform 0.3s ease;
-  transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  transform: ${(props) => (props.$isOpen ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
 const TopicText = styled.span`
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 14px;
-  color: #FFFFFF;
+  color: #ffffff;
 `;
-
 
 const DropdownButton = styled.button`
   display: flex;
@@ -87,7 +84,7 @@ const DropdownButton = styled.button`
   border: none;
   cursor: pointer;
   padding-top: 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
 `;
 
@@ -104,13 +101,13 @@ const DropdownMenu = styled.div`
   z-index: 1000;
   margin-top: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  display: ${props => props.$isOpen ? 'block' : 'none'};
+  display: ${(props) => (props.$isOpen ? "block" : "none")};
 `;
 
 const DropdownSection = styled.div`
   padding: 8px 0;
   border-bottom: 1px solid rgba(145, 166, 182, 0.1);
-  
+
   &:last-child {
     border-bottom: none;
   }
@@ -134,10 +131,11 @@ const DropdownItem = styled.button`
   width: 100%;
   text-align: left;
   padding: 10px 16px;
-  color: ${props => props.$isActive ? '#0D99FF' : '#d7dfe4'};
-  font-weight: ${props => props.$isActive ? '700' : '500'};
-  background-color: ${props => props.$isActive ? 'rgba(35, 149, 233, 0.1)' : 'transparent'};
-  
+  color: ${(props) => (props.$isActive ? "#0D99FF" : "#d7dfe4")};
+  font-weight: ${(props) => (props.$isActive ? "700" : "500")};
+  background-color: ${(props) =>
+    props.$isActive ? "rgba(35, 149, 233, 0.1)" : "transparent"};
+
   &:hover {
     background-color: rgba(35, 149, 233, 0.05);
   }
@@ -146,7 +144,7 @@ const DropdownItem = styled.button`
 const ContentContainer = styled.div`
   flex: 1;
   padding: 0 24px 24px 24px;
-  
+
   @media (max-width: 768px) {
     padding: 16px;
   }
@@ -158,7 +156,7 @@ const Title = styled.h1`
   font-weight: 500;
   color: #d7dfe4;
   margin-bottom: 20px;
-  
+
   @media (max-width: 768px) {
     font-size: 22px;
     margin-bottom: 16px;
@@ -171,7 +169,7 @@ const Paragraph = styled.p`
   line-height: 1.65;
   color: #d7dfe4;
   margin-bottom: 16px;
-  
+
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 2;
@@ -187,7 +185,7 @@ const Examples = styled.p`
   margin-bottom: 20px;
   padding-left: 16px;
   border-left: 3px solid #2395e9;
-  
+
   @media (max-width: 768px) {
     font-size: 14px;
     padding-left: 10px;
@@ -201,7 +199,7 @@ const Subtitle = styled.h2`
   font-weight: 500;
   color: #d7dfe4;
   margin: 24px 0 12px 0;
-  
+
   @media (max-width: 768px) {
     font-size: 16px;
     margin: 20px 0 10px 0;
@@ -211,7 +209,7 @@ const Subtitle = styled.h2`
 const List = styled.ul`
   margin-bottom: 20px;
   padding-left: 20px;
-  
+
   @media (max-width: 768px) {
     margin-bottom: 16px;
     padding-left: 16px;
@@ -225,7 +223,7 @@ const ListItem = styled.li`
   color: #d7dfe4;
   margin-bottom: 8px;
   position: relative;
-  
+
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 1.7;
@@ -244,7 +242,7 @@ const CodeBlock = styled.pre`
   color: #e9f1f8;
   margin-bottom: 20px;
   border-left: 3px solid #2395e9;
-  
+
   @media (max-width: 768px) {
     font-size: 12px;
     padding: 12px;
@@ -255,7 +253,7 @@ const CodeBlock = styled.pre`
 const TableContainer = styled.div`
   margin: 20px 0;
   overflow-x: auto;
-  
+
   @media (max-width: 768px) {
     margin: 16px 0;
   }
@@ -268,7 +266,7 @@ const Table = styled.table`
   font-size: 14px;
   color: #d7dfe4;
   margin-bottom: 20px;
-  
+
   @media (max-width: 768px) {
     font-size: 12px;
     margin-bottom: 16px;
@@ -281,7 +279,7 @@ const Th = styled.th`
   text-align: left;
   border: 1px solid #2b3844;
   font-weight: 600;
-  
+
   @media (max-width: 768px) {
     padding: 8px 12px;
   }
@@ -291,7 +289,7 @@ const Td = styled.td`
   padding: 10px 16px;
   border: 1px solid #2b3844;
   background-color: rgba(15, 25, 35, 0.5);
-  
+
   @media (max-width: 768px) {
     padding: 8px 12px;
   }
@@ -304,7 +302,7 @@ const Caption = styled.p`
   text-align: center;
   margin-top: 8px;
   font-style: italic;
-  
+
   @media (max-width: 768px) {
     font-size: 12px;
   }
@@ -315,7 +313,7 @@ const NextButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2395E9;
+  background-color: #2395e9;
   color: black;
   border: none;
   border-radius: 22px;
@@ -326,7 +324,7 @@ const NextButton = styled.button`
   cursor: pointer;
   margin-top: 20px;
   width: 180px;
-  
+
   @media (max-width: 768px) {
     margin: 20px auto;
   }
@@ -335,7 +333,7 @@ const NextButton = styled.button`
 const findNextItem = (currentItem, menuData) => {
   let found = false;
   let nextItem = null;
-  
+
   for (const section of menuData) {
     for (let i = 0; i < section.items.length; i++) {
       if (found) {
@@ -351,7 +349,7 @@ const findNextItem = (currentItem, menuData) => {
       }
     }
   }
-  
+
   return nextItem;
 };
 
@@ -403,15 +401,12 @@ const menuData = [
   },
 ];
 
-const StudyContent = ({ item, contentData, onItemClick }) => {
+const StudyContent = ({item, contentData, onItemClick}) => {
   const isMobile = useMobileDetection();
   // 'study', 'quiz', 'mock-exam'
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  
-
-  
   // 외부 클릭 감지하여 드롭다운 닫기
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -419,52 +414,77 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
         setDropdownOpen(false);
       }
     };
-    
-    document.addEventListener('mousedown', handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
+
   // 항목 선택 시 드롭다운 닫기
   const handleItemSelect = (selectedItem) => {
     onItemClick(selectedItem);
     setDropdownOpen(false);
   };
-  
+
   const nextItem = findNextItem(item, menuData);
-  
+
   if (!contentData || !contentData[item]) {
     return (
       <StudyPageContainer>
         {isMobile ? (
           <>
             <MobileHeader />
+
             <MobileHeaderSpacer />
             <MobileTopicNav ref={dropdownRef}>
               <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{display: "flex", alignItems: "center"}}>
                   <TopicIcon>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2 4.5H14M2 9.5H14M2 14.5H8" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2 4.5H14M2 9.5H14M2 14.5H8"
+                        stroke="#000000"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </TopicIcon>
                   <TopicText>목록</TopicText>
                 </div>
                 <DropdownIcon $isOpen={dropdownOpen}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M4 6L8 10L12 6"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </DropdownIcon>
               </DropdownButton>
-              
+
               <DropdownMenu $isOpen={dropdownOpen}>
                 {menuData.map((section, sectionIndex) => (
                   <DropdownSection key={sectionIndex}>
                     <DropdownSectionTitle>{section.title}</DropdownSectionTitle>
                     {section.items.map((menuItem, itemIndex) => (
-                      <DropdownItem 
-                        key={itemIndex} 
+                      <DropdownItem
+                        key={itemIndex}
                         $isActive={menuItem === item}
                         onClick={() => handleItemSelect(menuItem)}
                       >
@@ -500,28 +520,52 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
           <MobileHeaderSpacer />
           <MobileTopicNav ref={dropdownRef}>
             <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{display: "flex", alignItems: "center"}}>
                 <TopicIcon>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 4.5H14M2 9.5H14M2 14.5H8" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 4.5H14M2 9.5H14M2 14.5H8"
+                      stroke="#000000"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </TopicIcon>
                 <TopicText>{item}</TopicText>
               </div>
               <DropdownIcon $isOpen={dropdownOpen}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 6L8 10L12 6"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </DropdownIcon>
             </DropdownButton>
-            
+
             <DropdownMenu $isOpen={dropdownOpen}>
               {menuData.map((section, sectionIndex) => (
                 <DropdownSection key={sectionIndex}>
                   <DropdownSectionTitle>{section.title}</DropdownSectionTitle>
                   {section.items.map((menuItem, itemIndex) => (
-                    <DropdownItem 
-                      key={itemIndex} 
+                    <DropdownItem
+                      key={itemIndex}
                       $isActive={menuItem === item}
                       onClick={() => handleItemSelect(menuItem)}
                     >
@@ -536,7 +580,7 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
       ) : (
         <Sidebar activeItem={item} onItemClick={onItemClick} />
       )}
-      
+
       <ContentContainer>
         <Title>{data.title}</Title>
         {data.content.map((section, index) => {
@@ -585,11 +629,9 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
               return null;
           }
         })}
-        
+
         {nextItem && (
-          <NextButton onClick={() => onItemClick(nextItem)}>
-            다음 →
-          </NextButton>
+          <NextButton onClick={() => onItemClick(nextItem)}>다음 →</NextButton>
         )}
       </ContentContainer>
     </StudyPageContainer>
