@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+/** @format */
+
+import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 import Sidebar from "../layout/Sidebar";
-import MobileHeader, { MobileHeaderSpacer } from "../layout/MobileHeader";
 
 // 모바일 환경 감지
 const useMobileDetection = () => {
@@ -400,7 +401,7 @@ const menuData = [
   },
 ];
 
-const StudyContent = ({ item, contentData, onItemClick }) => {
+const StudyContent = ({item, contentData, onItemClick}) => {
   const isMobile = useMobileDetection();
   // 'study', 'quiz', 'mock-exam'
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -434,10 +435,15 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
         {isMobile ? (
           <>
             <MobileHeader />
+
             <MobileHeaderSpacer />
             <MobileTopicNav ref={dropdownRef}>
               <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
+<<<<<<< HEAD
                 <div style={{ display: "flex", alignItems: "center" }}>
+=======
+                <div style={{display: "flex", alignItems: "center"}}>
+>>>>>>> f57f6e4f7c752c600a80b354ab60bf55a8d4b54b
                   <TopicIcon>
                     <svg
                       width="16"
@@ -518,7 +524,11 @@ const StudyContent = ({ item, contentData, onItemClick }) => {
           <MobileHeaderSpacer />
           <MobileTopicNav ref={dropdownRef}>
             <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
+<<<<<<< HEAD
               <div style={{ display: "flex", alignItems: "center" }}>
+=======
+              <div style={{display: "flex", alignItems: "center"}}>
+>>>>>>> f57f6e4f7c752c600a80b354ab60bf55a8d4b54b
                 <TopicIcon>
                   <svg
                     width="16"
