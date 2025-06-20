@@ -3,6 +3,8 @@
 import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 import Sidebar from "../layout/Sidebar";
+import MobileHeader from "../layout/MobileHeader";
+import MobileHeaderSpacer from "../layout/MobileHeader";
 
 // 모바일 환경 감지
 const useMobileDetection = () => {
@@ -439,11 +441,7 @@ const StudyContent = ({item, contentData, onItemClick}) => {
             <MobileHeaderSpacer />
             <MobileTopicNav ref={dropdownRef}>
               <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
-<<<<<<< HEAD
                 <div style={{ display: "flex", alignItems: "center" }}>
-=======
-                <div style={{display: "flex", alignItems: "center"}}>
->>>>>>> f57f6e4f7c752c600a80b354ab60bf55a8d4b54b
                   <TopicIcon>
                     <svg
                       width="16"
@@ -524,11 +522,7 @@ const StudyContent = ({item, contentData, onItemClick}) => {
           <MobileHeaderSpacer />
           <MobileTopicNav ref={dropdownRef}>
             <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
-<<<<<<< HEAD
               <div style={{ display: "flex", alignItems: "center" }}>
-=======
-              <div style={{display: "flex", alignItems: "center"}}>
->>>>>>> f57f6e4f7c752c600a80b354ab60bf55a8d4b54b
                 <TopicIcon>
                   <svg
                     width="16"

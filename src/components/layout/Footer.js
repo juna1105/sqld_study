@@ -56,7 +56,7 @@ const ContactButton = styled(FooterButton)`
 `;
 
 const BuyMeCoffeeButton = styled.a`
-  display: inline-flex;
+  // display: inline-flex;
   align-items: center;
   background-color: #5f7fff;
   color: #ffffff;
