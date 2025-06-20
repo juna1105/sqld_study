@@ -41,7 +41,7 @@ const FooterButton = styled.a`
   transition: all 0.2s ease;
   cursor: pointer;
   color: #ffffff;
-  
+
   &:hover {
     transform: translateY(-2px);
   }
@@ -49,7 +49,7 @@ const FooterButton = styled.a`
 
 const ContactButton = styled(FooterButton)`
   background-color: #2563eb;
-  
+
   &:hover {
     background-color: #1d4ed8;
   }
@@ -58,21 +58,21 @@ const ContactButton = styled(FooterButton)`
 const BuyMeCoffeeButton = styled.a`
   display: inline-flex;
   align-items: center;
-  background-color: #5F7FFF;
+  background-color: #5f7fff;
   color: #ffffff;
   padding: 5px 15px;
   border-radius: 5px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s ease;
   gap: 8px;
-  
+
   &:hover {
     background-color: #4a6ae3;
     transform: translateY(-2px);
   }
-  
+
   img {
     height: 28px;
     width: auto;
@@ -87,26 +87,23 @@ const Copyright = styled.p`
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <FooterContainer>
       <FooterContent>
         <ButtonsContainer>
-          <ContactButton 
-            href="mailto:devimun909@gmail.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            📧 개발자 문의하기
+          <ContactButton href="https://open.kakao.com/o/sKwqjIwh">
+            📧 오픈채팅으로 문의하기
           </ContactButton>
           <BuyMeCoffeeButton
             href="https://www.buymeacoffee.com/devimun909"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img 
-              src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
-              alt="Buy me a coffee" 
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
+              alt="Buy me a coffee"
+              loading="lazy"
             />
             개발자 후원하기
           </BuyMeCoffeeButton>
@@ -117,4 +114,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

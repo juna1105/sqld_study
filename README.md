@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# SQLD Study (SQLD 자격증 학습/문제풀이/모의고사 웹앱)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 SQLD(데이터베이스 개발자) 자격증 취득을 위한 학습 자료, 퀴즈, 모의고사 기능을 제공하는 웹 애플리케이션입니다.  
+React 기반으로 제작되었으며, Firebase Hosting을 통해 배포할 수 있습니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 주요 기능
 
-### `npm start`
+- **학습 자료**: SQLD 시험에 필요한 이론과 핵심 내용을 정리하여 제공합니다.
+- **퀴즈**: 기출 및 예상 문제를 퀴즈 형식으로 풀어볼 수 있습니다.
+- **모의고사**: 실제 시험과 유사한 환경에서 실전 연습이 가능합니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 폴더 구조
 
-### `npm test`
+```
+src/
+  ├── App.js                # 라우팅 및 전체 앱 구조
+  ├── index.js              # 엔트리 포인트
+  ├── components/           # 주요 UI 컴포넌트
+  │   ├── layout/           # Header, Footer, Sidebar 등 레이아웃 컴포넌트
+  │   ├── quiz/             # 퀴즈 관련 컴포넌트 (Quiz, QuizPage, QuizResult 등)
+  │   ├── study/            # 학습 콘텐츠 컴포넌트 (StudyContent 등)
+  │   ├── mock_test/        # 모의고사 관련 컴포넌트 (MockTestPage, MockTestResults 등)
+  │   ├── common/           # 공통 컴포넌트 (현재 비어 있음)
+  │   └── SEO.js            # SEO 메타 태그 관리
+  ├── data/                 # 학습/퀴즈/모의고사 데이터 파일
+  │   ├── studyContent.js   # 이론 및 학습 자료
+  │   ├── quizData.js       # 퀴즈 문제 데이터
+  │   └── mock_exam.js      # 모의고사 문제 데이터
+  ├── App.css, index.css    # 전역 스타일
+  └── reportWebVitals.js    # 성능 측정
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 주요 기술 스택
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React** (CRA 기반)
+- **react-router-dom**: 라우팅
+- **styled-components**: CSS-in-JS 스타일링
+- **Firebase Hosting**: 배포 및 호스팅
+- **react-helmet**: SEO 메타 태그 관리
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 라우팅 구조
 
-### `npm run eject`
+- `/study` : SQLD 이론 및 학습 자료
+- `/quiz` : SQLD 퀴즈 문제 풀이
+- `/mock-exam` : SQLD 모의고사 실전 연습
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 데이터 구조 예시
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **studyContent.js**  
+  학습 주제별로 개념을 익힐 수 있는 페이지입니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **quizData.js**  
+  개념을 확인할 수 있는 O,X퀴즈 페이지입니다.
 
-## Learn More
+- **mock_exam.js**  
+  실제 시험과 동일한 조건으로 시험을 볼 수 있으며 타이머,오답 해설이 포함되어 있습니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 기타
 
-### Code Splitting
+- **SEO**: 각 페이지별로 SEO 메타 태그가 자동 적용됩니다.
+- **반응형 디자인**: 모바일, 태블릿, 데스크탑 모두 지원합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

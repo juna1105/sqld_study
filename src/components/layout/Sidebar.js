@@ -87,7 +87,7 @@ const MenuItem = styled.button`
 const menuData = [
   {
     title: "데이터 모델링의 이해",
-    items: ["데이터 모델의 이해", "엔티티", "속성", "관계", "식별자"],
+    items: ["데이터 모델의 이해", "엔터티", "속성", "관계", "식별자"],
   },
   {
     title: "데이터 모델과 SQL",
